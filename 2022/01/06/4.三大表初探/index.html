@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="功成不必在我 功力必不唐捐">
+    <meta name="author" content="Rayd62">
+    
+    <title>
+        
+            三大表初探 |
+        
+        Laplace&#39; Café
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"blog.hf2.space","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"功成不必在我 功力必不唐捐"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Laplace&#39; Café
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">三大表初探</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Rayd62</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-01-06 09:19:36</span>
+        <span class="mobile">2022-01-06 09:19</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2/">投资理财</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E8%AF%BB%E8%B4%A2%E6%8A%A5/">手把手教你读财报</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这个系列的博客是针对阅读《手把手教你读财报》（[中] 唐朝, ISBN: 9787513649551）一书的记录与思路整理。<br>目前正在学习股市基本面的一些知识，通过这个系列的博客与大家分享投资理财，股市基本面的内容。我认为选股是靠基本面来支撑的，而买卖的时机则是技术分析的优势。希望能通过这样的整理，帮助自己深入地理解财报之中的奥妙，也能为对此类话题有兴趣的读者提供一些微不足道的帮助。</p>
+<span id="more"></span>
+<h1 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h1><h2 id="财报时间"><a href="#财报时间" class="headerlink" title="财报时间"></a>财报时间</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>披露时间</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>经营年度</td>
+<td></td>
+<td>自然年（1月1日至12月31日）</td>
+</tr>
+<tr>
+<td>一季报</td>
+<td>一季度结束一个月内</td>
+<td>不得早于年报</td>
+</tr>
+<tr>
+<td>半年报</td>
+<td>8月底之前</td>
+<td></td>
+</tr>
+<tr>
+<td>三季报</td>
+<td>10月底</td>
+<td></td>
+</tr>
+<tr>
+<td>年报</td>
+<td>年度结束4个月内</td>
+<td>必须经会计师事务所审计并出具审计意见</td>
+</tr>
+</tbody></table>
+<h2 id="预报时间"><a href="#预报时间" class="headerlink" title="预报时间"></a>预报时间</h2><h3 id="上海证券交易所"><a href="#上海证券交易所" class="headerlink" title="上海证券交易所"></a>上海证券交易所</h3><p>在法定的季报、半年报和年报发布之前，某些情况下，上市公司还需要按照交易所要求，提前发布业绩预告或业绩快报。</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>亏损</td>
+<td>1&#x2F;31</td>
+</tr>
+<tr>
+<td>扭亏为盈</td>
+<td>1&#x2F;31</td>
+</tr>
+<tr>
+<td>实现盈利</td>
+<td>1&#x2F;31</td>
+</tr>
+</tbody></table>
+<h3 id="深圳证券交易所"><a href="#深圳证券交易所" class="headerlink" title="深圳证券交易所"></a>深圳证券交易所</h3><table>
+<thead>
+<tr>
+<th>情形</th>
+<th>补充</th>
+<th>时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>亏损</td>
+<td></td>
+<td>季报、半年报及年报前</td>
+</tr>
+<tr>
+<td>扭亏为盈</td>
+<td></td>
+<td>季报、半年报及年报前</td>
+</tr>
+<tr>
+<td>实现盈利，且净利润同比上升或下降50% 以上</td>
+<td>但上年同期基数较小，可申请豁免披露。</td>
+<td></td>
+</tr>
+<tr>
+<td>基数较小定义为：上年度每股收益不高于0.05 元，或上一年前三季度每股不高于0.04 元，或上一半年度每股收益不高于0.03 元，或上一年第一季度每股收益不高于0.02 元</td>
+<td>季报、半年报及年报前</td>
+<td></td>
+</tr>
+<tr>
+<td>期末净资产为负值</td>
+<td></td>
+<td>季报、半年报及年报前</td>
+</tr>
+<tr>
+<td>年度营业收入低于1000 万人民币</td>
+<td></td>
+<td>季报、半年报及年报前</td>
+</tr>
+</tbody></table>
+<h1 id="母公司概念"><a href="#母公司概念" class="headerlink" title="母公司概念"></a>母公司概念</h1><p>“母公司”只是表达公司之间互相关系，不是固定指谁。</p>
+<p>例如，A公司持有B 公司的60% 股权，B 公司持有C公司80%股权，C 持有D 51% 股权。那么A是B的母公司，B是C的母公司，C是D 的母公司。</p>
+<p>在财报中，<strong>“母公司资产负债表”、“母公司利润表”、“母公司现金流表”以及“母公司所有者权益变动表”，特指上市公司本部数据。</strong>除此之外，财报其它地方用到“母公司”，指的是上市公司的控股股东。</p>
+<h1 id="资产负债表"><a href="#资产负债表" class="headerlink" title="资产负债表"></a>资产负债表</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/Rayd62/blog_images/master/%E4%B8%89%E5%A4%A7%E8%A1%A8%E5%88%9D%E6%8E%A2/image.png"
+                     
+                ></p>
+<p>资产：钱的去向<br>常见形态有：厂房、设别、土地；投资、股票、理财产品；投入其他公司化作股份等等</p>
+<p>负债和股东权益：钱的来源<br>有借的：即负债<br>股东投的：股东权益</p>
+<p>因为钱不会无中生有，所以钱的来源和去向，总额永远相等。</p>
+<p><strong>有恒等式：资产&#x3D;负债+股东权益</strong><br>也可以写作：<strong>股东权益 &#x3D; 资产 - 负债，股东权益也被成为“净资产”</strong></p>
+<h2 id="各项在表中的排列顺序"><a href="#各项在表中的排列顺序" class="headerlink" title="各项在表中的排列顺序"></a>各项在表中的排列顺序</h2><p>钱的去处即公司资产，<strong>按变现（变成现金）便捷度排列</strong>：<br><strong>现金、银行存款</strong>等构成<strong>货币资金</strong>位于资产负债表最上<br>固定资产、无形资产、商誉等放在<strong>资产负债表最下</strong></p>
+<p><strong>流动资产</strong>：能在一年（或一个营业周期）内变现越容易越上<br><strong>非流动资产</strong>：超过一年（或一个营业周期）变现越难越下</p>
+<p>钱的来源按<strong>归还的紧迫程度</strong>排列：<br>所以负债在上、股东权益在下</p>
+<p>负债又分为：<br><strong>流动负债</strong>：债务到期时间是段于一年（或该企业的一个营业周期），越近越上<br><strong>非流动负债</strong>：债务到期时间超过一年（或该企业的一个营业周期），越远越下</p>
+<h2 id="阅读资产负债表的原则"><a href="#阅读资产负债表的原则" class="headerlink" title="阅读资产负债表的原则"></a>阅读资产负债表的原则</h2><ol>
+<li>资产端和负债端各项进行腾挪，想想为什么这么做，做的对不对</li>
+<li>和过去的数据进行对比，揣测公司为什么这么变</li>
+<li>和同行的数据进行对比<ol>
+<li>思考不同类型的资产在总资产中占比有何不同</li>
+<li>为何不同</li>
+<li>不同处是优势还是劣势</li>
+<li>对比应收票据、应收账款、应付账款、预付款项、预收款项等科目，发现公司在其行业上下游之间的地位，思考公司的竞争力强弱</li>
+</ol>
+</li>
+</ol>
+<h1 id="利润表"><a href="#利润表" class="headerlink" title="利润表"></a>利润表</h1><h2 id="“权责制”-财务造假的“温床”"><a href="#“权责制”-财务造假的“温床”" class="headerlink" title="“权责制”-财务造假的“温床”"></a>“权责制”-财务造假的“温床”</h2><h3 id="什么是“权责制”"><a href="#什么是“权责制”" class="headerlink" title="什么是“权责制”"></a>什么是“权责制”</h3><p>“权责制”又称“应收应付制”，是<strong>以权利或责任的发生来确定</strong>“应该得到的收入”和“应该支付的费用”，而<strong>不是考虑实际是否收到或支出的现金</strong>。</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>甲公司支付100万购买一辆火车给其它企业提供运输服务。<br>预计车辆能使用5年，那么按照“权责制”，现在甲公司已经支付出去的100万车款，要分摊在5年里作为甲公司的费用支出，而非全部算成当年的费用。<br>同理，若合同约定运输费用为每季度结算一次，季度结束的10个工作日内结算，那么到财年结束12月31日，虽然第四季度运输费用并没有收到，但甲公司依然要将第四季度的运输费作为本年度收入计入。<br>简单来说，依照“权责发生制”，<strong>没有收到的钱，可能被算作本期收入；没有付出的钱，可能被记为本期成本。已经收到的钱，可能不是本期收入；已经支付的钱，也可能不是本期成本。</strong></p>
+<h2 id="归母净利润"><a href="#归母净利润" class="headerlink" title="归母净利润"></a>归母净利润</h2><h3 id="为什么会有归母净利润"><a href="#为什么会有归母净利润" class="headerlink" title="为什么会有归母净利润"></a>为什么会有归母净利润</h3><p>大部分上市公司都控制着数量不等的子公司，部分子公司上市公司持有其100% 股权，<strong>也有很多只是持有大部分股份的控股子公司</strong>。<br>由于上市公司制作合并报表时，是将子公司的全部资产、负债、收入和费用统一计算的，这<strong>无形中将控股子公司合作伙伴的少部分股份所对应的资产、负债，以及损益也合并进来了</strong>。所以合并报表需要有个科目<strong>单独汇报这部分数据</strong>。<br>在<strong>合并资产负债表</strong>里，该科目叫做“<strong>少数股东权益</strong>”，用于放置合作伙伴持有的少部分股权所对应的股东权益总和。<br>在<strong>合并利润表</strong>里，汇总合作伙伴们持有子公司少数股份所对应的损益，叫作“<strong>少数股东损益</strong>”。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>少数股东权益</th>
+<th>少数股东损益</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>出现表不同</td>
+<td>合并资产负债表</td>
+<td>合并利润表</td>
+</tr>
+<tr>
+<td>含义不同</td>
+<td>权益指净资产</td>
+<td>损益，指利润或亏损</td>
+</tr>
+</tbody></table>
+<h3 id="归母净利润如何计算"><a href="#归母净利润如何计算" class="headerlink" title="归母净利润如何计算"></a>归母净利润如何计算</h3><p><strong>归属于母公司所有者权益</strong> &#x3D; 上市公司本部及其子公司的全部资产 - 全部负债 - 少数股东权益<br>简称<strong>“归母净资产”</strong> 。</p>
+<p><strong>归属于母公司所有者净利润</strong> &#x3D; 合并利润表净利润 - 少数股东权益<br>简称<strong>“归母净利润”</strong>或者<strong>“归母净利”</strong></p>
+<p><strong>市盈率（Price&#x2F;Book Value, PB）</strong> &#x3D; 股票价格 &#x2F; 每股净资产<br>PB &#x3D; 公司总市值 &#x2F; 归母净资产</p>
+<p><strong>市净率（Price&#x2F;Earning）</strong> &#x3D; 股票价格 &#x2F; 每股收益</p>
+<h1 id="现金流量表"><a href="#现金流量表" class="headerlink" title="现金流量表"></a>现金流量表</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/Rayd62/blog_images/master/%E4%B8%89%E5%A4%A7%E8%A1%A8%E5%88%9D%E6%8E%A2/image_1.png"
+                     
+                ></p>
+<p>现金量流表简单来说就是记流水账，类似年初有多少现金，期间收到多少，付出去多少，还剩多少。</p>
+<blockquote>
+<p>由于现金不产生任何收益，所以企业应尽最大可能减少持有现金的数量才是明智的。<br>同时按照我国《现金管理暂行条例》，允许企业保留的现金限额，一版以三到五天的日常零星开支为限。边远地区和交通不便地区的企业，也不得超过十五天的日常零星开支。</p>
+</blockquote>
+<p><strong>现金等价物：</strong>日常经营所需的流动资金，一般以银行存款、理财产品或高流动性的短期债券形式存在，这些东西都被称为“现金等价物”。</p>
+<p>现金流量表就是记录现金和现金等价物在本报告期内的变动情况。</p>
+<p>经营活动：</p>
+<ol>
+<li>企业销售商品；</li>
+<li>企业提供劳务带来的现金收入；</li>
+<li>以及对应的现金支出。</li>
+</ol>
+<p><strong>要注意的是，对于不同类型的企业，其经营活动是不一样的。</strong></p>
+<p>例如，对于制造企业来说，它的经营活动指的是生产或销售商品。企业借入&#x2F;借出资金，或者拿现金去买卖股票都不应该属于其经营活动。<br>但对于银行来说，借入&#x2F;借出的资金恰恰是它的经营活动<br>对于证券公司来说，利用公司资金买卖股票也是其企业经营活动的一部分。</p>
+<p>计入经营活动产生的现金流量。</p>
+<p>投资活动：</p>
+<ol>
+<li>包括企业的固定资产、无形资产等长期资产的买入或处置</li>
+<li>对外股权的投资和处置以及持有期间的理财投资</li>
+</ol>
+<p>对于该项需要注意的是，现金及现金等价物范围的理财类投资，如现金变成活期存款，或活期存款变成高流动性短期债券，不会被计算为投资活动现金流入或流出。（因为它只涉及到现金及现金等价物之间的转换，而非流入和流出）</p>
+<p>计入投资活动产生的现金流量。</p>
+<p>筹资活动：</p>
+<ol>
+<li>扩大或缩小股本规模</li>
+<li>对外举债或还债行为</li>
+</ol>
+<p>需要注意的是，该处的举债或还债行为，不包括企业日常经营活动中产生的应收应付款项。</p>
+<p>计入筹资活动产生的现金流量。</p>
+<p>对于涉及到境外资金的企业，还需要关注汇率变动对现金及现金等价物的影响表项。</p>
+<h1 id="其它内容"><a href="#其它内容" class="headerlink" title="其它内容"></a>其它内容</h1><p>对于研读财报来说，除了关注以上三张表外，<strong>董事会报告和重要事项</strong>是<strong>必须细读</strong>的内容。</p>
+<h2 id="董事会报告"><a href="#董事会报告" class="headerlink" title="董事会报告"></a>董事会报告</h2><p>最好是将多年的连在一起读。通过<strong>前后对比</strong>，来判断董事会说话是否<strong>可信</strong>，对市场<strong>判断是否准确</strong>，对企业<strong>掌控力</strong>的强弱等等。</p>
+<h2 id="附注"><a href="#附注" class="headerlink" title="附注"></a>附注</h2><p>对三张表有任何疑问，都需要在报表的附注部分去寻找解释。</p>
+<p>企业必须披露却又不太想让你明白的东西，一般都藏在附注里。从这个意义上来说，财报附注也是投资者必须阅读的内容。</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：三大表初探</li>
+        <li>本文作者：Rayd62</li>
+        <li>创建时间：2022-01-06 09:19:36</li>
+        <li>
+            本文链接：https://blog.hf2.space/2022/01/06/4.三大表初探/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">#读书笔记</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2/">#投资理财</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E8%AF%BB%E8%B4%A2%E6%8A%A5/">#手把手教你读财报</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/01/09/5.%E4%BD%BF%E7%94%A8SSH%E8%BD%AC%E5%8F%91%E8%BF%9E%E6%8E%A5%E8%BF%9C%E7%A8%8Blocalhost-%E7%AB%AF%E5%8F%A3/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">使用SSH转发连接远程localhost 端口</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/01/06/3.DNS/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">DNS</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Rayd62</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%B6%E9%97%B4"><span class="nav-number">2.</span> <span class="nav-text">时间</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%A2%E6%8A%A5%E6%97%B6%E9%97%B4"><span class="nav-number">2.1.</span> <span class="nav-text">财报时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%84%E6%8A%A5%E6%97%B6%E9%97%B4"><span class="nav-number">2.2.</span> <span class="nav-text">预报时间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E6%B5%B7%E8%AF%81%E5%88%B8%E4%BA%A4%E6%98%93%E6%89%80"><span class="nav-number">2.2.1.</span> <span class="nav-text">上海证券交易所</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%B1%E5%9C%B3%E8%AF%81%E5%88%B8%E4%BA%A4%E6%98%93%E6%89%80"><span class="nav-number">2.2.2.</span> <span class="nav-text">深圳证券交易所</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AF%8D%E5%85%AC%E5%8F%B8%E6%A6%82%E5%BF%B5"><span class="nav-number">3.</span> <span class="nav-text">母公司概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B5%84%E4%BA%A7%E8%B4%9F%E5%80%BA%E8%A1%A8"><span class="nav-number">4.</span> <span class="nav-text">资产负债表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%84%E9%A1%B9%E5%9C%A8%E8%A1%A8%E4%B8%AD%E7%9A%84%E6%8E%92%E5%88%97%E9%A1%BA%E5%BA%8F"><span class="nav-number">4.1.</span> <span class="nav-text">各项在表中的排列顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%85%E8%AF%BB%E8%B5%84%E4%BA%A7%E8%B4%9F%E5%80%BA%E8%A1%A8%E7%9A%84%E5%8E%9F%E5%88%99"><span class="nav-number">4.2.</span> <span class="nav-text">阅读资产负债表的原则</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%A9%E6%B6%A6%E8%A1%A8"><span class="nav-number">5.</span> <span class="nav-text">利润表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%80%9C%E6%9D%83%E8%B4%A3%E5%88%B6%E2%80%9D-%E8%B4%A2%E5%8A%A1%E9%80%A0%E5%81%87%E7%9A%84%E2%80%9C%E6%B8%A9%E5%BA%8A%E2%80%9D"><span class="nav-number">5.1.</span> <span class="nav-text">“权责制”-财务造假的“温床”</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E2%80%9C%E6%9D%83%E8%B4%A3%E5%88%B6%E2%80%9D"><span class="nav-number">5.1.1.</span> <span class="nav-text">什么是“权责制”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-number">5.1.2.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%92%E6%AF%8D%E5%87%80%E5%88%A9%E6%B6%A6"><span class="nav-number">5.2.</span> <span class="nav-text">归母净利润</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%9C%89%E5%BD%92%E6%AF%8D%E5%87%80%E5%88%A9%E6%B6%A6"><span class="nav-number">5.2.1.</span> <span class="nav-text">为什么会有归母净利润</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%92%E6%AF%8D%E5%87%80%E5%88%A9%E6%B6%A6%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97"><span class="nav-number">5.2.2.</span> <span class="nav-text">归母净利润如何计算</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%B0%E9%87%91%E6%B5%81%E9%87%8F%E8%A1%A8"><span class="nav-number">6.</span> <span class="nav-text">现金流量表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E5%AE%83%E5%86%85%E5%AE%B9"><span class="nav-number">7.</span> <span class="nav-text">其它内容</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%91%A3%E4%BA%8B%E4%BC%9A%E6%8A%A5%E5%91%8A"><span class="nav-number">7.1.</span> <span class="nav-text">董事会报告</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%E6%B3%A8"><span class="nav-number">7.2.</span> <span class="nav-text">附注</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

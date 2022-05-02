@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="功成不必在我 功力必不唐捐">
+    <meta name="author" content="Rayd62">
+    
+    <title>
+        
+            17.使用ocserv 在Ubuntu 20.04 上搭建SSLVPN |
+        
+        Laplace&#39; Café
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"blog.hf2.space","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"功成不必在我 功力必不唐捐"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Laplace&#39; Café
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">17.使用ocserv 在Ubuntu 20.04 上搭建SSLVPN</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Rayd62</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-04-02 02:01:57</span>
+        <span class="mobile">2022-04-02 02:01</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E7%BD%91%E7%BB%9C/">网络</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h2 id="Why-SSLVPN-amp-Why-Ocserv"><a href="#Why-SSLVPN-amp-Why-Ocserv" class="headerlink" title="Why SSLVPN &amp; Why Ocserv"></a>Why SSLVPN &amp; Why Ocserv</h2><h3 id="SSLVPN"><a href="#SSLVPN" class="headerlink" title="SSLVPN"></a>SSLVPN</h3><p>SSLVPN 是一种简单且安全的远程隧道访问技术。采用了公钥加密的方式来保障数据在传输过程中的安全性，它采用浏览器和服务器直接沟通的方式，方便了用户又通过SSL 协议来保障了数据安全。SSL 协议采用了SSL&#x2F;TLS 综合加密的方法来保障数据安全。</p>
+<h3 id="Ocserv"><a href="#Ocserv" class="headerlink" title="Ocserv"></a>Ocserv</h3><p>Ocserv 的主要优势有：</p>
+<ol>
+<li>开源，大家可以免费使用</li>
+<li>支持Cisco Anyconnect 客户端（稳定）</li>
+<li>客户端多平台支援</li>
+<li>服务器支持绝大部分Linux 和BSD</li>
+<li>支持密码认证和证书认证</li>
+<li>支持RADIUS 审计</li>
+<li>支持Virtual Hosting - 虚拟主机（Nginx - multi domain）</li>
+<li>部署简单</li>
+</ol>
+<h2 id="前置需求"><a href="#前置需求" class="headerlink" title="前置需求"></a>前置需求</h2><ol>
+<li>Ubuntu 20.04（1G RAM）</li>
+<li>公网IP 地址</li>
+<li>域名</li>
+</ol>
+<h2 id="部署手册"><a href="#部署手册" class="headerlink" title="部署手册"></a>部署手册</h2><h3 id="1-安装Openconnect-VPN-Server"><a href="#1-安装Openconnect-VPN-Server" class="headerlink" title="1. 安装Openconnect VPN Server"></a>1. 安装Openconnect VPN Server</h3><p>使用<code>ssh</code> 登陆服务器，使用<code>apt</code>来安装<code>ocserv</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update -y</span><br><span class="line">sudo apt upgrade -y</span><br><span class="line">sudo apt install ocserv</span><br><span class="line">sudo systemctl start ocserv</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后，使用命令检查服务状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl status ocserv</span><br></pre></td></tr></table></figure>
+<p>示例：<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Rayd62/note_images/202203232124865.png"
+                     
+                ></p>
+<h2 id="2-安装Let’s-Encrypt-Client（certbot）"><a href="#2-安装Let’s-Encrypt-Client（certbot）" class="headerlink" title="2. 安装Let’s Encrypt Client（certbot）"></a>2. 安装Let’s Encrypt Client（certbot）</h2><p>使用<code>Let&#39;s Encrypt</code>为VPN 服务器颁发证书。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># install Let&#x27;s Encrypt Client - certbot</span></span><br><span class="line">sudo apt install certbot</span><br><span class="line"></span><br><span class="line"><span class="comment"># check the version</span></span><br><span class="line">certbot --version</span><br><span class="line"><span class="comment"># simple output: certbot 0.40.0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># open firewall, prepare for next step</span></span><br><span class="line">ufw allow 80,443/tcp</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-通过Let‘s-Encrypt-获取可信任TLS-证书"><a href="#3-通过Let‘s-Encrypt-获取可信任TLS-证书" class="headerlink" title="3. 通过Let‘s Encrypt 获取可信任TLS 证书"></a>3. 通过Let‘s Encrypt 获取可信任TLS 证书</h2><p>主要有两种方式（<code>standalone</code>和<code>webroot</code>）为<code>ocserv</code>获取一个TLS 证书。</p>
+<h3 id="Standalone"><a href="#Standalone" class="headerlink" title="Standalone"></a>Standalone</h3><p>如果没有网站部署在你的VPN 服务器上同时你也希望VPN Server 使用443 端口来监听远程接入，那么可以使用<code>standalone</code>插件来从Let’s Encrypt 获取TLS 证书。</p>
+<ol>
+<li>首先在DNS 服务提供商，将VPN 服务器的公网IP 绑定到准备好的域名上</li>
+<li>在VPN 服务器上使用命令获取证书</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">	sudo certbot certonly --standalone --preferred-challenges http --argee-tos --email youremail@email.com -d yourdomain.vpn.example.com</span><br><span class="line"><span class="comment"># certonly: 获取证书但不安装</span></span><br><span class="line"><span class="comment"># --standalone：使用standalone 插件来获取证书</span></span><br><span class="line"><span class="comment"># --preferred-challenges http： 使用http 来检验域名，会使用80 端口，注意在上一步骤中将在服务器中将防火墙放通80/tcp 端口</span></span><br><span class="line"><span class="comment"># --agree-tos：同意Let&#x27;s Encrypt 服务条款</span></span><br><span class="line"><span class="comment"># --email：用来注册账户和账号恢复的邮箱</span></span><br><span class="line"><span class="comment"># -d：你准备好的域名</span></span><br></pre></td></tr></table></figure>
+<p>如果你看到如下图的信息，那么表示你已经成功获取到了TLS 证书：<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Rayd62/note_images/202203232147109.png"
+                     
+                ></p>
+<h3 id="使用Webroot-Plugin-获取证书"><a href="#使用Webroot-Plugin-获取证书" class="headerlink" title="使用Webroot Plugin 获取证书"></a>使用Webroot Plugin 获取证书</h3><p>推荐在VPN服务器同时部署了网站服务的时候使用这种方法，因为Webroot插件适用于几乎所有的Web服务器，我们不需要在Web服务器中安装证书。</p>
+<p>首先，需要在网页服务器中为域名创建一个虚拟主机（virtual Host）。</p>
+<h4 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h4><p>用熟悉的编辑器打开<code>/etc/nginx/conf.d/yourdomain.vpn.example.com.conf</code></p>
+<p>将下列配置粘贴到文件中，并保存：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">      listen 80;</span><br><span class="line">      server_name vpn.example.com;</span><br><span class="line"></span><br><span class="line">      root /var/www/ocserv/;</span><br><span class="line"></span><br><span class="line">      location ~ /.well-known/acme-challenge &#123;</span><br><span class="line">         allow all;</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行下列命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建网站服务的root 目录</span></span><br><span class="line">sudo <span class="built_in">mkdir</span> -p /var/www/ocserv</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将网站的root 目录权限设置给`www-data`（nginx default user）</span></span><br><span class="line">sudo <span class="built_in">chown</span> www-data:www-data /var/www/ocserv -R</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启nginx 服务</span></span><br><span class="line">sudo systemctl reload nginx</span><br></pre></td></tr></table></figure>
+
+<p>然后使用<code>let&#39;s encrypt</code>后去TLS 证书：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo certbot certonly --webroot --agree-tos --email youremail@example.com -d yourdomain.vpn.example.com -w /var/www/ocserv</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-编辑VPN-服务配置文件"><a href="#4-编辑VPN-服务配置文件" class="headerlink" title="4. 编辑VPN 服务配置文件"></a>4. 编辑VPN 服务配置文件</h2><p><code>ocserv</code>配置文件：<code>/etc/ocserv/ocserv.conf</code></p>
+<h3 id="配置认证方式"><a href="#配置认证方式" class="headerlink" title="配置认证方式"></a>配置认证方式</h3><p>默认情况下，<code>ocserv</code>使用PAM 组件来进行认证（也就是使用Linux 用户的账号和密码来认证），建议使用独立的账号密码作为VPN 的账号：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在配置文件中，注释下面一行</span></span><br><span class="line"><span class="comment"># auth = &quot;pam[gid-min=1000]&quot;</span></span><br><span class="line"><span class="comment"># 使用一个文件来保存 VPN 用户的账号和密码</span></span><br><span class="line">auth = <span class="string">&quot;plain[passwd=/etc/ocserv/ocpasswd]&quot;</span></span><br><span class="line"><span class="comment"># 完成配置文件后，我们会使用 ocpasswd 命令来创建/etc/ocserv/ocpasswd</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="修改VPN-服务监听端口"><a href="#修改VPN-服务监听端口" class="headerlink" title="修改VPN 服务监听端口"></a>修改VPN 服务监听端口</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在配置文件中，注释下面两行</span></span><br><span class="line"><span class="comment">#tcp-port = 443</span></span><br><span class="line"><span class="comment">#udp-port = 443</span></span><br><span class="line"><span class="comment"># 指定你希望的端口用作VPN 服务</span></span><br><span class="line">tcp-port = 4433</span><br><span class="line">udp-port = 4433</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改VPN-使用的TLS-证书"><a href="#修改VPN-使用的TLS-证书" class="headerlink" title="修改VPN 使用的TLS 证书"></a>修改VPN 使用的TLS 证书</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在配置文件中，注释下面两行</span></span><br><span class="line"><span class="comment"># server-cert = /etc/ssl/certs/ssl-cert-snakeoil.pem</span></span><br><span class="line"><span class="comment"># server-key = /etc/ssl/private/ssl-cert-snakeoil.key</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定证书和密钥的文件，注意将vpn.example.com 替换成你的域名</span></span><br><span class="line">server-cert = /etc/letsencrypt/live/vpn.example.com/fullchain.pem</span><br><span class="line">server-key = /etc/letsencrypt/live/vpn.example.com/privkey.pem</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置最大客户端访问数量"><a href="#设置最大客户端访问数量" class="headerlink" title="设置最大客户端访问数量"></a>设置最大客户端访问数量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 最大有128 个客户端可以连接VPN，设置为0 表示无限制</span></span><br><span class="line">max-clients = 128</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置同一用户最大接入数量"><a href="#设置同一用户最大接入数量" class="headerlink" title="设置同一用户最大接入数量"></a>设置同一用户最大接入数量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 同一用户最大在线设备2，设置为0 表示无限制</span></span><br><span class="line">max-same-clients = 2 </span><br></pre></td></tr></table></figure>
+
+<h3 id="修改默认keepalive-package-发送时间"><a href="#修改默认keepalive-package-发送时间" class="headerlink" title="修改默认keepalive package 发送时间"></a>修改默认keepalive package 发送时间</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 默认值为300s，建议改小</span></span><br><span class="line">keepalive = 30</span><br></pre></td></tr></table></figure>
+
+<h3 id="允许MTU-探测"><a href="#允许MTU-探测" class="headerlink" title="允许MTU 探测"></a>允许MTU 探测</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将下行false 改为true，以允许MTU 探测</span></span><br><span class="line">try-mtu-discovery = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="设置客户端保持空闲时间"><a href="#设置客户端保持空闲时间" class="headerlink" title="设置客户端保持空闲时间"></a>设置客户端保持空闲时间</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果你希望客户端不自动掉线，推荐下面两行配置</span></span><br><span class="line">idle-timeout=1200</span><br><span class="line">mobile-idle-timeout=1800</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置默认域名"><a href="#设置默认域名" class="headerlink" title="设置默认域名"></a>设置默认域名</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">default-domain = yourdomain.vpn.exmaple.com</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置接入后获取的IP-网段"><a href="#设置接入后获取的IP-网段" class="headerlink" title="设置接入后获取的IP 网段"></a>设置接入后获取的IP 网段</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 因为很多家庭网络是用的是192.168.0.0/24 或192.168.1.0/24 推荐避开这两个段</span></span><br><span class="line">ipv4-network = 192.168.10.0</span><br><span class="line">ipv4-netmask = 255.255.255.0</span><br></pre></td></tr></table></figure>
+
+<h3 id="DNS-流量通过VPN-隧道"><a href="#DNS-流量通过VPN-隧道" class="headerlink" title="DNS 流量通过VPN 隧道"></a>DNS 流量通过VPN 隧道</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tunnel-all-dns = <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="设置VPN-接入客户端使用的DNS-服务器"><a href="#设置VPN-接入客户端使用的DNS-服务器" class="headerlink" title="设置VPN 接入客户端使用的DNS 服务器"></a>设置VPN 接入客户端使用的DNS 服务器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 根据实际情况选用合适的DNS 服务器，可以是内网DNS 服务器</span></span><br><span class="line">dns = 8.8.8.8</span><br><span class="line">dns = 1.1.1.1</span><br></pre></td></tr></table></figure>
+
+<h3 id="为个别网段设置VPN-服务器为默认网关"><a href="#为个别网段设置VPN-服务器为默认网关" class="headerlink" title="为个别网段设置VPN 服务器为默认网关"></a>为个别网段设置VPN 服务器为默认网关</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 连接服务器后，客户端会将10.0.0.0/8 和172.16.0.0/12 网段的网关设置为VPN 服务器</span></span><br><span class="line">route = 10.0.0.0/8</span><br><span class="line">route = 172.16.0.0/12</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果要用VPN 服务器作为默认网关，取消掉下行注释</span></span><br><span class="line"><span class="comment"># route = default</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="修改配置后重启ocserv-服务"><a href="#修改配置后重启ocserv-服务" class="headerlink" title="修改配置后重启ocserv 服务"></a>修改配置后重启ocserv 服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart ocserv</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-创建VPN-账户"><a href="#5-创建VPN-账户" class="headerlink" title="5. 创建VPN 账户"></a>5. 创建VPN 账户</h2><p>使用<code>ocpasswd</code> 工具创建本地VPN 账号：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将下列username 替换为用户账号</span></span><br><span class="line">sudo ocpasswd -c /etc/ocserv/ocpasswd username</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>若需要使用 VPN 服务器作为代理服务器访问互联网，请参考以下链接。<a class="link"   target="_blank" rel="noopener" href="https://www.linuxbabe.com/ubuntu/openconnect-vpn-server-ocserv-ubuntu-20-04-lets-encrypt" >Set Up OpenConnect VPN Server (ocserv) on Ubuntu 20.04 with Let’s Encrypt (linuxbabe.com)<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：17.使用ocserv 在Ubuntu 20.04 上搭建SSLVPN</li>
+        <li>本文作者：Rayd62</li>
+        <li>创建时间：2022-04-02 02:01:57</li>
+        <li>
+            本文链接：https://blog.hf2.space/2022/04/02/17-使用ocserv-在Ubuntu-20-04-上搭建SSLVPN/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E7%BD%91%E7%BB%9C/">#网络</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E8%BF%90%E7%BB%B4/">#运维</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/04/02/18-%E5%BC%80%E5%90%AFPVE-%E5%AE%BF%E4%B8%BB%E6%9C%BA%E7%9A%84nested%E8%99%9A%E6%8B%9F%E5%8C%96/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">18.开启PVE 宿主机的nested虚拟化</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/03/23/16-FTTH-%E5%85%89%E7%BA%A4%E6%8E%A5%E5%85%A5%E7%BD%91/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">FTTH-光纤接入网</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Rayd62</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-SSLVPN-amp-Why-Ocserv"><span class="nav-number">1.</span> <span class="nav-text">Why SSLVPN &amp; Why Ocserv</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SSLVPN"><span class="nav-number">1.1.</span> <span class="nav-text">SSLVPN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ocserv"><span class="nav-number">1.2.</span> <span class="nav-text">Ocserv</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E9%9C%80%E6%B1%82"><span class="nav-number">2.</span> <span class="nav-text">前置需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E6%89%8B%E5%86%8C"><span class="nav-number">3.</span> <span class="nav-text">部署手册</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85Openconnect-VPN-Server"><span class="nav-number">3.1.</span> <span class="nav-text">1. 安装Openconnect VPN Server</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%AE%89%E8%A3%85Let%E2%80%99s-Encrypt-Client%EF%BC%88certbot%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">2. 安装Let’s Encrypt Client（certbot）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E9%80%9A%E8%BF%87Let%E2%80%98s-Encrypt-%E8%8E%B7%E5%8F%96%E5%8F%AF%E4%BF%A1%E4%BB%BBTLS-%E8%AF%81%E4%B9%A6"><span class="nav-number">5.</span> <span class="nav-text">3. 通过Let‘s Encrypt 获取可信任TLS 证书</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Standalone"><span class="nav-number">5.1.</span> <span class="nav-text">Standalone</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Webroot-Plugin-%E8%8E%B7%E5%8F%96%E8%AF%81%E4%B9%A6"><span class="nav-number">5.2.</span> <span class="nav-text">使用Webroot Plugin 获取证书</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Nginx"><span class="nav-number">5.2.1.</span> <span class="nav-text">Nginx</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%BC%96%E8%BE%91VPN-%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">6.</span> <span class="nav-text">4. 编辑VPN 服务配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%AE%A4%E8%AF%81%E6%96%B9%E5%BC%8F"><span class="nav-number">6.1.</span> <span class="nav-text">配置认证方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9VPN-%E6%9C%8D%E5%8A%A1%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3"><span class="nav-number">6.2.</span> <span class="nav-text">修改VPN 服务监听端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9VPN-%E4%BD%BF%E7%94%A8%E7%9A%84TLS-%E8%AF%81%E4%B9%A6"><span class="nav-number">6.3.</span> <span class="nav-text">修改VPN 使用的TLS 证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%9C%80%E5%A4%A7%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AE%BF%E9%97%AE%E6%95%B0%E9%87%8F"><span class="nav-number">6.4.</span> <span class="nav-text">设置最大客户端访问数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%90%8C%E4%B8%80%E7%94%A8%E6%88%B7%E6%9C%80%E5%A4%A7%E6%8E%A5%E5%85%A5%E6%95%B0%E9%87%8F"><span class="nav-number">6.5.</span> <span class="nav-text">设置同一用户最大接入数量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%BB%98%E8%AE%A4keepalive-package-%E5%8F%91%E9%80%81%E6%97%B6%E9%97%B4"><span class="nav-number">6.6.</span> <span class="nav-text">修改默认keepalive package 发送时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%81%E8%AE%B8MTU-%E6%8E%A2%E6%B5%8B"><span class="nav-number">6.7.</span> <span class="nav-text">允许MTU 探测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BF%9D%E6%8C%81%E7%A9%BA%E9%97%B2%E6%97%B6%E9%97%B4"><span class="nav-number">6.8.</span> <span class="nav-text">设置客户端保持空闲时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E5%9F%9F%E5%90%8D"><span class="nav-number">6.9.</span> <span class="nav-text">设置默认域名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%8E%A5%E5%85%A5%E5%90%8E%E8%8E%B7%E5%8F%96%E7%9A%84IP-%E7%BD%91%E6%AE%B5"><span class="nav-number">6.10.</span> <span class="nav-text">设置接入后获取的IP 网段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS-%E6%B5%81%E9%87%8F%E9%80%9A%E8%BF%87VPN-%E9%9A%A7%E9%81%93"><span class="nav-number">6.11.</span> <span class="nav-text">DNS 流量通过VPN 隧道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEVPN-%E6%8E%A5%E5%85%A5%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BD%BF%E7%94%A8%E7%9A%84DNS-%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">6.12.</span> <span class="nav-text">设置VPN 接入客户端使用的DNS 服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%B8%AA%E5%88%AB%E7%BD%91%E6%AE%B5%E8%AE%BE%E7%BD%AEVPN-%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%BA%E9%BB%98%E8%AE%A4%E7%BD%91%E5%85%B3"><span class="nav-number">6.13.</span> <span class="nav-text">为个别网段设置VPN 服务器为默认网关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E5%90%8E%E9%87%8D%E5%90%AFocserv-%E6%9C%8D%E5%8A%A1"><span class="nav-number">6.14.</span> <span class="nav-text">修改配置后重启ocserv 服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%88%9B%E5%BB%BAVPN-%E8%B4%A6%E6%88%B7"><span class="nav-number">7.</span> <span class="nav-text">5. 创建VPN 账户</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

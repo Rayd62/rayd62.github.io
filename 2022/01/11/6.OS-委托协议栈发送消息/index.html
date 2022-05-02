@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="功成不必在我 功力必不唐捐">
+    <meta name="author" content="Rayd62">
+    
+    <title>
+        
+            OS - 委托协议栈发送消息 |
+        
+        Laplace&#39; Café
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"blog.hf2.space","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"功成不必在我 功力必不唐捐"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Laplace&#39; Café
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">OS - 委托协议栈发送消息</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Rayd62</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-01-11 03:10:41</span>
+        <span class="mobile">2022-01-11 03:10</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF/">网络技术</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84/">网络是怎样连接的</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这个系列的博客是针对阅读《网络是怎样连接的》（[日] 户根勤, 译 [中] 周自恒, ISBN: 9787115441249）一书的记录与思路整理。<br>有些概念是做纯路由交换的网络工程师很少接触但又很重要的部分，因此整理到这里以做分享。</p>
+<span id="more"></span>
+
+<h1 id="协议栈委托全貌"><a href="#协议栈委托全貌" class="headerlink" title="协议栈委托全貌"></a>协议栈委托全貌</h1><p>应用程序做网络通讯需要委托操作系统协议栈来搭建数据通道并发送数据，这一过程需要按一定顺序调用socket 库中一系列的组件。</p>
+<p>收发数据的两台计算机之间连接了一条数据通道，数据沿着这条通道流动，最终到达目的地。我们可以把数据通道想象成一条管道，将数据从一端送入管道，数据就会到达管道的另一端然后被取出。数据可以从任何一端被送入管道，数据的流动是双向的。</p>
+<p>对于一个TCP 应用来说，可以总结成以下4个通讯过程：</p>
+<ol>
+<li>创建套接字</li>
+<li>将管道连接到服务器端的套接字上</li>
+<li>收发数据</li>
+<li>断开管道并删除套接字</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/rayd62/blog_images/04/image.png"
+                     
+                ></p>
+<blockquote>
+<p>前面这 4 个操作都是由操作系统中的协议栈来执行的，浏览器等应用程序并不会自己去做连接管道、放入数据这些工作，而是委托协议栈来代劳。此外，这些委托的操作都是通过调用 Socket 库中的程序组件来执行的，但这些数据通信用的程序组件其实仅仅充当了一个桥梁的角色，并不执行任何实质性的操作，应用程序的委托内容最终会被原原本本地传递给协议栈。因此，我们无法形象地展示这些程序组件到底完成了怎样的工作，与其勉强强调 Socket 库的存在，还不如将 Socket 库和协议栈看成一个整体并讲解它们的整体行为让人更容易理解。</p>
+</blockquote>
+<h1 id="创建套接字阶段"><a href="#创建套接字阶段" class="headerlink" title="创建套接字阶段"></a>创建套接字阶段</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/rayd62/blog_images/04/image_1.png"
+                     
+                ></p>
+<p>客户端创建套接字的操作非常简单，只要<strong>调用Socket 库中的socket 程序组件</strong>就可以了。调用socket 之后，控制流程会转移到socket 内部并执行创建套接字的操作，完成后控制流程又会移交回应用程序。</p>
+<blockquote>
+<p>“书中出现了 Socket、socket、套接字（英文也是 socket）等看起来非常容易混淆的词，其中小写的 socket 表示程序组件的名称，大写字母开头的 Socket 表示库，而汉字的“套接字”则表示管道两端的接口。”</p>
+</blockquote>
+<p>套接字创建完成后，协议栈会返回一个描述符，应用程序会将收到的描述符放到内存中。<strong>描述符是用来识别不同的套接字的。</strong></p>
+<blockquote>
+<p>计算机中会同时进行多个数据的通信操作，例如可以打开两个浏览器窗口，同时访问两台Web 服务器。这时，计算机内部有两个数据收发操作在同时进行，也就需要创建两个不同的套接字，进一步思考就必须有一种手段来识别不同的套接字，这个方法就是描述符。<br>想象一下在酒店寄存行李的场景，酒店服务人员会分给你一个号码牌，向服务人员出示号码牌，就可以取回自己寄存的行李，描述符的远离和号码牌差不多。</p>
+</blockquote>
+<h1 id="连接阶段"><a href="#连接阶段" class="headerlink" title="连接阶段"></a>连接阶段</h1><p>应用程序通过调用Socket 库中的connect 程序，委托协议栈将客户端创建的套接字与服务器的套接字进行连接。</p>
+<p>调用connect 需要三个参数：</p>
+<ol>
+<li>描述符，在创建套接字时由协议栈返回的；协议栈通过描述符来判断应该对哪个套接字进行操作</li>
+<li>服务器IP 地址，在进行数据收发操作时，双方必须知道对方的IP 地址并告知协议栈。</li>
+<li>端口号，对端服务器套接字拥有的端口号。</li>
+</ol>
+<blockquote>
+<p>既然可以用创建套接字时，协议栈返还的描述符来标识每个套接字，那么访问远程服务器上的一个套接字为什么还需要用到端口呢？<br>先说结论，不能用描述符来替代端口号。<br>这是因为，描述符是和委托创建套接字的应用程序进行交互时使用的，另一方无法得知应用程序从协议栈获取了什么描述符（本地有效）。所以，我们需要另外一个对客户端也同样适用的机制，而这个机制就是端口号。</p>
+</blockquote>
+<p>端口号其实也是一个本地有效的编号，但是我们通过将常用服务的端口号实现规定好的方法来使之可以供客户端远程访问。例如HTTP 的端口号默认是80，HTTPS 的端口号默认是443。</p>
+<p>同样的，既然确定连接对象的套接字需要使用端口号，那么服务器也必须知道客户端套接字的端口号才行。<br>客户端在创建套接字的时候，协议栈会为这个套接字随机分配一个端口号。接下来，当协议栈执行连接操作时，会将这个随机分配的端口号通知给服务器。</p>
+<blockquote>
+<p>描述符：应用程序用来识别套接字的机制；<br>IP 地址和端口号：客户端和服务器之间用来识别对方套接字的机制。</p>
+</blockquote>
+<h1 id="通信阶段-消息传递"><a href="#通信阶段-消息传递" class="headerlink" title="通信阶段 - 消息传递"></a>通信阶段 - 消息传递</h1><p>当套接字连接起来之后，剩下的事情就是将数据送入套接字。应用程序需要调用Socket 库中的write 程序来执行这个操作。</p>
+<h2 id="数据发送"><a href="#数据发送" class="headerlink" title="数据发送"></a>数据发送</h2><p>首先应用程序需要在内存中准备好要发送的数据。<br>在HTTP 的例子中，根据用户输入的网址生成的HTTP 请求消息就是我们要发送的数据。</p>
+<p>接下来应用程序调用write 时，需要制定描述符和发送数据，然后协议栈就会将数据通过指定的协议栈通道发送到服务器。由于套接字中已经保存了已连接的通信对象的相关信息，所以只要通过描述符指定套接字，就可以识别出通信对象，并向其发送数据了。</p>
+<p>接着，发送的数据会通过网络到达我们要访问的服务器。</p>
+<h2 id="数据返回"><a href="#数据返回" class="headerlink" title="数据返回"></a>数据返回</h2><p>服务器执行接受操作，解析收到的数据内容并执行相应的操作，然后向客户端返回响应消息。</p>
+<p>接收消息的操作是应用程序通过Socket 库中的read 程序组件委派协议栈完成的。</p>
+<p>调用read 时需要指定用于存放接收消息的内存地址，这一内存地址被称之为缓冲区。于是，当服务器返回响应消息时，read 就会负责将接收到的响应消息存放到缓冲区中。<br>而由于缓冲区是一块位于应用程序内部的内存空间，因此当消息被存放到缓冲区中时，就相当于数据已经转交给了应用程序。</p>
+<h1 id="断开阶段"><a href="#断开阶段" class="headerlink" title="断开阶段"></a>断开阶段</h1><p>当数据收发完毕，服务器和客户端会有一方主动发起断开。应用程序需要调用Socket 库中的close 程序来完成此操作。最终，连接在套接字之间的管道会断开，而客户端的套接字本身也会被删除。</p>
+<blockquote>
+<p>“断开的过程如下。Web 使用的 HTTP 协议规定，当 Web 服务器发送完响应消息之后，应该主动执行断开操作，因此 Web 服务器会首先调用 close 来断开连接。断开操作传达到客户端之后，客户端的套接字也会进入断开阶段。接下来，当浏览器调用 read 执行接收数据操作时，read 会告知浏览器收发数据操作已结束，连接已经断开。浏览器得知后，也会调用 close 进入断开阶段。” - HTTP 1.0</p>
+</blockquote>
+<blockquote>
+<p>“这就是 HTTP 的工作过程。HTTP 协议将 HTML 文档和图片都作为单独的对象来处理，每获取一次数据，就要执行一次连接、发送请求消息、接收响应消息、断开的过程。因此，如果一个网页中包含很多张图片，就必须重复进行很多次连接、收发数据、断开的操作。对于同一台服务器来说，重复连接和断开显然是效率很低的，因此后来人们又设计出了能够在一次连接中收发多个请求和响应的方法。在 HTTP 版本 1.1 中就可以使用这种方法，在这种情况下，当所有数据都请求完成后，浏览器会主动触发断开连接的操作。”</p>
+</blockquote>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：OS - 委托协议栈发送消息</li>
+        <li>本文作者：Rayd62</li>
+        <li>创建时间：2022-01-11 03:10:41</li>
+        <li>
+            本文链接：https://blog.hf2.space/2022/01/11/6.OS-委托协议栈发送消息/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">#读书笔记</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF/">#网络技术</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84/">#网络是怎样连接的</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/01/11/7.%E5%8D%8F%E8%AE%AE%E6%A0%88-%E5%88%9B%E5%BB%BA%E5%A5%97%E6%8E%A5%E5%AD%97/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">协议栈 - 创建套接字</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/01/09/5.%E4%BD%BF%E7%94%A8SSH%E8%BD%AC%E5%8F%91%E8%BF%9E%E6%8E%A5%E8%BF%9C%E7%A8%8Blocalhost-%E7%AB%AF%E5%8F%A3/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">使用SSH转发连接远程localhost 端口</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Rayd62</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%8F%E8%AE%AE%E6%A0%88%E5%A7%94%E6%89%98%E5%85%A8%E8%B2%8C"><span class="nav-number">2.</span> <span class="nav-text">协议栈委托全貌</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%A5%97%E6%8E%A5%E5%AD%97%E9%98%B6%E6%AE%B5"><span class="nav-number">3.</span> <span class="nav-text">创建套接字阶段</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E9%98%B6%E6%AE%B5"><span class="nav-number">4.</span> <span class="nav-text">连接阶段</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%9A%E4%BF%A1%E9%98%B6%E6%AE%B5-%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92"><span class="nav-number">5.</span> <span class="nav-text">通信阶段 - 消息传递</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%8F%91%E9%80%81"><span class="nav-number">5.1.</span> <span class="nav-text">数据发送</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E8%BF%94%E5%9B%9E"><span class="nav-number">5.2.</span> <span class="nav-text">数据返回</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%AD%E5%BC%80%E9%98%B6%E6%AE%B5"><span class="nav-number">6.</span> <span class="nav-text">断开阶段</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

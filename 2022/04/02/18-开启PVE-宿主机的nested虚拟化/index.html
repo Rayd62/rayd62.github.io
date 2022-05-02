@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="功成不必在我 功力必不唐捐">
+    <meta name="author" content="Rayd62">
+    
+    <title>
+        
+            18.开启PVE 宿主机的nested虚拟化 |
+        
+        Laplace&#39; Café
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"blog.hf2.space","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"功成不必在我 功力必不唐捐"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Laplace&#39; Café
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">18.开启PVE 宿主机的nested虚拟化</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Rayd62</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-04-02 02:09:41</span>
+        <span class="mobile">2022-04-02 02:09</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/Proxmox-VE/">Proxmox VE</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/">虚拟化</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>最近在使用Proxmox VE 平台为服务器提供虚拟化能力，顺便把EVE-NG 迁移到该平台，然后发现需要额外做一点工作来将CPU 的虚拟化功能expose 到Guest OS。以下是找到的相关资料和我在服务器上的操作记录整合。</p>
+<h1 id="检查宿主机CPU-是否支持虚拟化"><a href="#检查宿主机CPU-是否支持虚拟化" class="headerlink" title="检查宿主机CPU 是否支持虚拟化"></a>检查宿主机CPU 是否支持虚拟化</h1><p>检查PVE 宿主机是否开启嵌套虚拟化</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@proxmox:~<span class="comment"># cat /sys/module/kvm_intel/parameters/nested   </span></span><br><span class="line">N</span><br></pre></td></tr></table></figure>
+
+<p>显示<code>N</code>即尚未开启。进行如下操作开启嵌套虚拟化。</p>
+<h2 id="对于Intel-CPU-来说（自行查看CPU-是否支持）"><a href="#对于Intel-CPU-来说（自行查看CPU-是否支持）" class="headerlink" title="对于Intel CPU 来说（自行查看CPU 是否支持）"></a>对于Intel CPU 来说（自行查看CPU 是否支持）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;options kvm-intel nested=Y&quot;</span> &gt; /etc/modprobe.d/kvm-intel.conf</span><br></pre></td></tr></table></figure>
+
+<h2 id="对于AMD-CPU来说（自行查看CPU-是否支持）"><a href="#对于AMD-CPU来说（自行查看CPU-是否支持）" class="headerlink" title="对于AMD CPU来说（自行查看CPU 是否支持）"></a>对于AMD CPU来说（自行查看CPU 是否支持）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;options kvm-amd nested=1&quot;</span> &gt; /etc/modprobe.d/kvm-amd.conf</span><br></pre></td></tr></table></figure>
+
+<p>针对自己的硬件平台执行完上述操作后，重启或重载内核模块。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重载内核模块</span></span><br><span class="line">modprobe -r kvm_intel</span><br><span class="line">modprobe kvm_intel</span><br></pre></td></tr></table></figure>
+
+<p>推荐重启，省事。</p>
+<p>这时候再次检查，应该显示<code>Y</code>代表已开启。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@proxmox:~<span class="comment"># cat /sys/module/kvm_intel/parameters/nested                    </span></span><br><span class="line">Y</span><br></pre></td></tr></table></figure>
+
+<p><strong>Note: 注意什么时候用的是下划线</strong>******，什么时候用的是短横线********。**</p>
+<h1 id="开启EVE-的虚拟化"><a href="#开启EVE-的虚拟化" class="headerlink" title="开启EVE 的虚拟化"></a>开启EVE 的虚拟化</h1><p>首先在PVE 的控制台或直接SSH 登陆主机，使用命令查看虚拟机。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 注意110 是虚拟机主机ID，在网页中可直接看到</span></span><br><span class="line">root@pve:~<span class="comment"># qm showcmd 110 --pretty</span></span><br><span class="line">/usr/bin/kvm \</span><br><span class="line">  -<span class="built_in">id</span> 110 \</span><br><span class="line">  -name EVE-NG-PRO \</span><br><span class="line">  -no-shutdown \</span><br><span class="line">  -chardev <span class="string">&#x27;socket,id=qmp,path=/var/run/qemu-server/110.qmp,server=on,wait=off&#x27;</span> \</span><br><span class="line">  -mon <span class="string">&#x27;chardev=qmp,mode=control&#x27;</span> \</span><br><span class="line">  -chardev <span class="string">&#x27;socket,id=qmp-event,path=/var/run/qmeventd.sock,reconnect=5&#x27;</span> \</span><br><span class="line">  -mon <span class="string">&#x27;chardev=qmp-event,mode=control&#x27;</span> \</span><br><span class="line">  -pidfile /var/run/qemu-server/110.pid \</span><br><span class="line">  -daemonize \</span><br><span class="line">  -smbios <span class="string">&#x27;type=1,uuid=a72029d4-c893-49c1-a9f3-cf50378eda30&#x27;</span> \</span><br><span class="line">  -smp <span class="string">&#x27;14,sockets=1,cores=14,maxcpus=14&#x27;</span> \</span><br><span class="line">  -nodefaults \</span><br><span class="line">  -boot <span class="string">&#x27;menu=on,strict=on,reboot-timeout=1000,splash=/usr/share/qemu-server/bootsplash.jpg&#x27;</span> \</span><br><span class="line">  -vnc <span class="string">&#x27;unix:/var/run/qemu-server/110.vnc,password=on&#x27;</span> \</span><br><span class="line">  -cpu kvm64,enforce,+kvm_pv_eoi,+kvm_pv_unhalt,+lahf_lm,+sep \</span><br><span class="line">  -m 61440 \</span><br><span class="line">  -device <span class="string">&#x27;pci-bridge,id=pci.1,chassis_nr=1,bus=pci.0,addr=0x1e&#x27;</span> \</span><br><span class="line">  -device <span class="string">&#x27;pci-bridge,id=pci.2,chassis_nr=2,bus=pci.0,addr=0x1f&#x27;</span> \</span><br><span class="line">  -device <span class="string">&#x27;vmgenid,guid=8a062fe1-5c54-4382-8ef8-e0dc13e274f8&#x27;</span> \</span><br><span class="line">  -device <span class="string">&#x27;piix3-usb-uhci,id=uhci,bus=pci.0,addr=0x1.0x2&#x27;</span> \</span><br><span class="line">  -device <span class="string">&#x27;usb-tablet,id=tablet,bus=uhci.0,port=1&#x27;</span> \</span><br><span class="line">  -chardev <span class="string">&#x27;socket,id=serial0,path=/var/run/qemu-server/110.serial0,server=on,wait=off&#x27;</span> \</span><br><span class="line">  -device <span class="string">&#x27;isa-serial,chardev=serial0&#x27;</span> \</span><br><span class="line">  -device <span class="string">&#x27;VGA,id=vga,bus=pci.0,addr=0x2&#x27;</span> \</span><br><span class="line">  -device <span class="string">&#x27;virtio-balloon-pci,id=balloon0,bus=pci.0,addr=0x3&#x27;</span> \</span><br><span class="line">  -iscsi <span class="string">&#x27;initiator-name=iqn.1993-08.org.debian:01:dcfb1238fcc&#x27;</span> \</span><br><span class="line">  -device <span class="string">&#x27;lsi,id=scsihw0,bus=pci.0,addr=0x5&#x27;</span> \</span><br><span class="line">  -drive <span class="string">&#x27;file=/dev/pve/vm-110-disk-0,if=none,id=drive-scsi0,format=raw,cache=none,aio=io_uring,detect-zeroes=on&#x27;</span> \</span><br><span class="line">  -device <span class="string">&#x27;scsi-hd,bus=scsihw0.0,scsi-id=0,drive=drive-scsi0,id=scsi0,bootindex=100&#x27;</span> \</span><br><span class="line">  -netdev <span class="string">&#x27;type=tap,id=net0,ifname=tap110i0,script=/var/lib/qemu-server/pve-bridge,downscript=/var/lib/qemu-server/pve-bridgedown&#x27;</span> \</span><br><span class="line">  -device <span class="string">&#x27;e1000,mac=A6:A9:53:54:4F:F8,netdev=net0,bus=pci.0,addr=0x12,id=net0&#x27;</span> \</span><br><span class="line">  -machine <span class="string">&#x27;type=pc+pve0&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>拷贝得到的输出到编辑器中，找到其中<code>-cpu kvm64,enforce,+kvm_pv_eoi,+kvm_pv_unhalt,+lahf_lm,+sep</code></p>
+<p>在其后添加<code>+vmx</code>，即：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/kvm \</span><br><span class="line">  -<span class="built_in">id</span> 110 \</span><br><span class="line">  -name EVE-NG-PRO \</span><br><span class="line">  -no-shutdown \</span><br><span class="line">  -chardev <span class="string">&#x27;socket,id=qmp,path=/var/run/qemu-server/110.qmp,server=on,wait=off&#x27;</span> \</span><br><span class="line">  -mon <span class="string">&#x27;chardev=qmp,mode=control&#x27;</span> \</span><br><span class="line">  -chardev <span class="string">&#x27;socket,id=qmp-event,path=/var/run/qmeventd.sock,reconnect=5&#x27;</span> \</span><br><span class="line">  -mon <span class="string">&#x27;chardev=qmp-event,mode=control&#x27;</span> \</span><br><span class="line">  -pidfile /var/run/qemu-server/110.pid \</span><br><span class="line">  -daemonize \</span><br><span class="line">  -smbios <span class="string">&#x27;type=1,uuid=a72029d4-c893-49c1-a9f3-cf50378eda30&#x27;</span> \</span><br><span class="line">  -smp <span class="string">&#x27;14,sockets=1,cores=14,maxcpus=14&#x27;</span> \</span><br><span class="line">  -nodefaults \</span><br><span class="line">  -boot <span class="string">&#x27;menu=on,strict=on,reboot-timeout=1000,splash=/usr/share/qemu-server/bootsplash.jpg&#x27;</span> \</span><br><span class="line">  -vnc <span class="string">&#x27;unix:/var/run/qemu-server/110.vnc,password=on&#x27;</span> \</span><br><span class="line">  -cpu kvm64,enforce,+kvm_pv_eoi,+kvm_pv_unhalt,+lahf_lm,+sep,+vmx \</span><br><span class="line">  -m 61440 \</span><br><span class="line">  -device <span class="string">&#x27;pci-bridge,id=pci.1,chassis_nr=1,bus=pci.0,addr=0x1e&#x27;</span> \</span><br><span class="line">  -device <span class="string">&#x27;pci-bridge,id=pci.2,chassis_nr=2,bus=pci.0,addr=0x1f&#x27;</span> \</span><br><span class="line">  -device <span class="string">&#x27;vmgenid,guid=8a062fe1-5c54-4382-8ef8-e0dc13e274f8&#x27;</span> \</span><br><span class="line">  -device <span class="string">&#x27;piix3-usb-uhci,id=uhci,bus=pci.0,addr=0x1.0x2&#x27;</span> \</span><br><span class="line">  -device <span class="string">&#x27;usb-tablet,id=tablet,bus=uhci.0,port=1&#x27;</span> \</span><br><span class="line">  -chardev <span class="string">&#x27;socket,id=serial0,path=/var/run/qemu-server/110.serial0,server=on,wait=off&#x27;</span> \</span><br><span class="line">  -device <span class="string">&#x27;isa-serial,chardev=serial0&#x27;</span> \</span><br><span class="line">  -device <span class="string">&#x27;VGA,id=vga,bus=pci.0,addr=0x2&#x27;</span> \</span><br><span class="line">  -device <span class="string">&#x27;virtio-balloon-pci,id=balloon0,bus=pci.0,addr=0x3&#x27;</span> \</span><br><span class="line">  -iscsi <span class="string">&#x27;initiator-name=iqn.1993-08.org.debian:01:dcfb1238fcc&#x27;</span> \</span><br><span class="line">  -device <span class="string">&#x27;lsi,id=scsihw0,bus=pci.0,addr=0x5&#x27;</span> \</span><br><span class="line">  -drive <span class="string">&#x27;file=/dev/pve/vm-110-disk-0,if=none,id=drive-scsi0,format=raw,cache=none,aio=io_uring,detect-zeroes=on&#x27;</span> \</span><br><span class="line">  -device <span class="string">&#x27;scsi-hd,bus=scsihw0.0,scsi-id=0,drive=drive-scsi0,id=scsi0,bootindex=100&#x27;</span> \</span><br><span class="line">  -netdev <span class="string">&#x27;type=tap,id=net0,ifname=tap110i0,script=/var/lib/qemu-server/pve-bridge,downscript=/var/lib/qemu-server/pve-bridgedown&#x27;</span> \</span><br><span class="line">  -device <span class="string">&#x27;e1000,mac=A6:A9:53:54:4F:F8,netdev=net0,bus=pci.0,addr=0x12,id=net0&#x27;</span> \</span><br><span class="line">  -machine <span class="string">&#x27;type=pc+pve0&#x27;</span> \</span><br><span class="line">  -cpu kvm64,enforce,+kvm_pv_eoi,+kvm_pv_unhalt,+lahf_lm,+sep,+vmx</span><br></pre></td></tr></table></figure>
+
+<p>复制所得，然后在PVE 的CLI 界面使用该命令，启动VM 110 （EVE-NG）。</p>
+<p>使用<code>qm list</code> 查看虚拟机状态，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">oot@pve:~<span class="comment"># qm list</span></span><br><span class="line">      VMID NAME                 STATUS     MEM(MB)    BOOTDISK(GB) PID       </span><br><span class="line">       110 EVE-NG-PRO           running    61440              0.00 1434 </span><br></pre></td></tr></table></figure>
+
+<p>显示虚拟机已经启动。</p>
+<p>这是登陆到虚拟机的CLI 界面，使用<code>egrep &quot;vmx|svm&quot; /proc/cpuinfo flags</code>，查看是否成功在虚机中启动虚拟化。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">root§eve-ng:ß<span class="comment"># egrep &quot;vmx|svm&quot; --color=always /proc/cpuinfo      </span></span><br><span class="line">flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx lm constant_tsc nopl xtopology cpuid tsc_known_freq pni vmx cx16 x2apic hypervisor lahf_lm cpuid_fault tpr_shadow</span><br><span class="line">flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx lm constant_tsc nopl xtopology cpuid tsc_known_freq pni vmx cx16 x2apic hypervisor lahf_lm cpuid_fault tpr_shadow</span><br><span class="line">flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx lm constant_tsc nopl xtopology cpuid tsc_known_freq pni vmx cx16 x2apic hypervisor lahf_lm cpuid_fault tpr_shadow</span><br><span class="line">flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx lm constant_tsc nopl xtopology cpuid tsc_known_freq pni vmx cx16 x2apic hypervisor lahf_lm cpuid_fault tpr_shadow</span><br><span class="line">flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx lm constant_tsc nopl xtopology cpuid tsc_known_freq pni vmx cx16 x2apic hypervisor lahf_lm cpuid_fault tpr_shadow</span><br><span class="line">flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx lm constant_tsc nopl xtopology cpuid tsc_known_freq pni vmx cx16 x2apic hypervisor lahf_lm cpuid_fault tpr_shadow</span><br><span class="line">flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx lm constant_tsc nopl xtopology cpuid tsc_known_freq pni vmx cx16 x2apic hypervisor lahf_lm cpuid_fault tpr_shadow</span><br><span class="line">flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx lm constant_tsc nopl xtopology cpuid tsc_known_freq pni vmx cx16 x2apic hypervisor lahf_lm cpuid_fault tpr_shadow</span><br><span class="line">flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx lm constant_tsc nopl xtopology cpuid tsc_known_freq pni vmx cx16 x2apic hypervisor lahf_lm cpuid_fault tpr_shadow</span><br><span class="line">flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx lm constant_tsc nopl xtopology cpuid tsc_known_freq pni vmx cx16 x2apic hypervisor lahf_lm cpuid_fault tpr_shadow</span><br><span class="line">flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx lm constant_tsc nopl xtopology cpuid tsc_known_freq pni vmx cx16 x2apic hypervisor lahf_lm cpuid_fault tpr_shadow</span><br><span class="line">flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx lm constant_tsc nopl xtopology cpuid tsc_known_freq pni vmx cx16 x2apic hypervisor lahf_lm cpuid_fault tpr_shadow</span><br><span class="line">flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx lm constant_tsc nopl xtopology cpuid tsc_known_freq pni vmx cx16 x2apic hypervisor lahf_lm cpuid_fault tpr_shadow</span><br><span class="line">flags           : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx lm constant_tsc nopl xtopology cpuid tsc_known_freq pni vmx cx16 x2apic hypervisor lahf_lm cpuid_fault tpr_shadow</span><br></pre></td></tr></table></figure>
+
+<h1 id="将VMX参数添加为默认启动项"><a href="#将VMX参数添加为默认启动项" class="headerlink" title="将VMX参数添加为默认启动项"></a>将VMX参数添加为默认启动项</h1><p>在PVE 的host 机中，编辑需要启动<code>vmx</code>的主机的配置文件。文件存放于<code>/etc/pve/qemu-server</code>下。</p>
+<p>修改对应vm-id 的配置文件，在这里需要修改的文件是<code>110.conf</code></p>
+<p>在第一行添加<code>args: -cpu &#39;kvm64,enforce,+kvm_pv_eoi,+kvm_pv_unhalt,+lahf_lm,+sep,+vmx&#39;</code>（注意该命令请通过<code>qm showcmd 110 —pretty</code>命令，找到CPU 选项的一行，手动添加<code>+vmx</code>），保存。通过网页启动110 虚机时无需再通过命令行手动添加<code>vmx</code>启动选项启动guest virtualization nest。</p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：18.开启PVE 宿主机的nested虚拟化</li>
+        <li>本文作者：Rayd62</li>
+        <li>创建时间：2022-04-02 02:09:41</li>
+        <li>
+            本文链接：https://blog.hf2.space/2022/04/02/18-开启PVE-宿主机的nested虚拟化/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E8%BF%90%E7%BB%B4/">#运维</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/Proxmox-VE/">#Proxmox VE</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/">#虚拟化</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/04/02/17-%E4%BD%BF%E7%94%A8ocserv-%E5%9C%A8Ubuntu-20-04-%E4%B8%8A%E6%90%AD%E5%BB%BASSLVPN/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">17.使用ocserv 在Ubuntu 20.04 上搭建SSLVPN</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Rayd62</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E5%AE%BF%E4%B8%BB%E6%9C%BACPU-%E6%98%AF%E5%90%A6%E6%94%AF%E6%8C%81%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">检查宿主机CPU 是否支持虚拟化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8EIntel-CPU-%E6%9D%A5%E8%AF%B4%EF%BC%88%E8%87%AA%E8%A1%8C%E6%9F%A5%E7%9C%8BCPU-%E6%98%AF%E5%90%A6%E6%94%AF%E6%8C%81%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">对于Intel CPU 来说（自行查看CPU 是否支持）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8EAMD-CPU%E6%9D%A5%E8%AF%B4%EF%BC%88%E8%87%AA%E8%A1%8C%E6%9F%A5%E7%9C%8BCPU-%E6%98%AF%E5%90%A6%E6%94%AF%E6%8C%81%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">对于AMD CPU来说（自行查看CPU 是否支持）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%90%AFEVE-%E7%9A%84%E8%99%9A%E6%8B%9F%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">开启EVE 的虚拟化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%86VMX%E5%8F%82%E6%95%B0%E6%B7%BB%E5%8A%A0%E4%B8%BA%E9%BB%98%E8%AE%A4%E5%90%AF%E5%8A%A8%E9%A1%B9"><span class="nav-number">3.</span> <span class="nav-text">将VMX参数添加为默认启动项</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

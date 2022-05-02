@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="功成不必在我 功力必不唐捐">
+    <meta name="author" content="Rayd62">
+    
+    <title>
+        
+            使用Docker 搭建Ghost |
+        
+        Laplace&#39; Café
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"blog.hf2.space","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"功成不必在我 功力必不唐捐"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Laplace&#39; Café
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">使用Docker 搭建Ghost</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Rayd62</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-01-04 04:45:53</span>
+        <span class="mobile">2022-01-04 04:45</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E5%BB%BA%E7%AB%99/">建站</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E5%85%AC%E6%9C%89%E4%BA%91/">公有云</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近在阿里云上买了一台轻量服务器，初衷是用来做爬虫的，但是试了几天拿到的数据效果不太理想，资源闲置也是浪费干脆搭一个自己的Blog 来做记录和分享。</p>
+<p>这篇文档就这么诞生了，主要是记录一下折腾Ghost 博客系统的过程。</p>
+<span id="more"></span>
+<h1 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h1><p>本文使用的环境是CentOS 8.2（个人习惯使用RHEL 的系统，和Ghost 官方推荐的Ubuntu 在安装程序和创建用户的部分有一点点不一样而已。）</p>
+<p>推荐使用一个用户账号进行下列操作，但是涉及到很多权限的修改。如果对Linux 不熟悉可以直接使用root 账号完成下列操作。</p>
+<h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y yum-utils</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="配置阿里云的镜像仓库"><a href="#配置阿里云的镜像仓库" class="headerlink" title="配置阿里云的镜像仓库"></a>配置阿里云的镜像仓库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="更新yum-源"><a href="#更新yum-源" class="headerlink" title="更新yum 源"></a>更新yum 源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum makecache</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="安装Docker-程序"><a href="#安装Docker-程序" class="headerlink" title="安装Docker 程序"></a>安装Docker 程序</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 清理现有环境Docker，官方镜像无需进行</span></span><br><span class="line">sudo yum remove docker \</span><br><span class="line">                  docker-client \</span><br><span class="line">                  docker-client-latest \</span><br><span class="line">                  docker-common \</span><br><span class="line">                  docker-latest \</span><br><span class="line">                  docker-latest-logrotate \</span><br><span class="line">                  docker-logrotate \</span><br><span class="line">                  docker-engine</span><br><span class="line"><span class="comment"># 安装Docker </span></span><br><span class="line">yum install docker -y</span><br><span class="line"><span class="comment"># 安装前会有如下告警，输入y 并回车</span></span><br><span class="line"><span class="comment"># 可以到https://docs.docker.com/engine/install/centos/ 的install Docker Engine 的那一步检查指纹</span></span><br><span class="line">警告：/var/cache/dnf/docker-ce-stable-ab4061364e2cf0db/packages/containerd.io-1.4.9-3.1.el8.x86_64.rpm: 头V4 RSA/SHA512 Signature, 密钥 ID 621e9f35: NOKEY</span><br><span class="line">Docker CE Stable - x86_64                                                                                                      21 kB/s | 1.6 kB     00:00</span><br><span class="line">导入 GPG 公钥 0x621E9F35:</span><br><span class="line"> Userid: <span class="string">&quot;Docker Release (CE rpm) &lt;docker@docker.com&gt;&quot;</span></span><br><span class="line"> 指纹: 060A 61C5 1B55 8A7F 742B 77AA C52F EB6B 621E 9F35</span><br><span class="line"> 来自: https://mirrors.aliyun.com/docker-ce/linux/centos/gpg</span><br><span class="line">确定吗？[y/N]： y</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="启动Docker"><a href="#启动Docker" class="headerlink" title="启动Docker"></a>启动Docker</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动docker 进程</span></span><br><span class="line">systemctl start docker</span><br><span class="line"><span class="comment"># 检查docker 进程状态，状态如下为Active 就是正常的</span></span><br><span class="line">systemctl status docker</span><br><span class="line">● docker.service - Docker Application Container Engine</span><br><span class="line">   Loaded: loaded (/usr/lib/systemd/system/docker.service; disabled; vendor preset: disabled)</span><br><span class="line">   Active: active (running) since Fri 2021-09-24 20:46:19 CST; 51s ago</span><br><span class="line"><span class="comment"># 将docker 进程加入开机启动</span></span><br><span class="line">systemctl <span class="built_in">enable</span> docker</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="配置阿里云Docker镜像加速"><a href="#配置阿里云Docker镜像加速" class="headerlink" title="配置阿里云Docker镜像加速"></a>配置阿里云Docker镜像加速</h2><p>在阿里云控制台找到容器镜像服务，选择最下面的镜像加速器，获取加速器地址。注意每个用户的加速器地址不一致，需要自行去该页面获取。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/rayd62/blog_images/01/image.png"
+                     
+                ></p>
+<p>在服务器上，复制上图中右下角红框中的代码，执行。完成后使用<code>systemctl daemon-reload</code>和<code>systemctl restart docker</code> 重启docker 服务。</p>
+<h1 id="使用Docker-Compose-启动Ghost"><a href="#使用Docker-Compose-启动Ghost" class="headerlink" title="使用Docker-Compose 启动Ghost"></a>使用Docker-Compose 启动Ghost</h1><h2 id="安装Docker-Compose"><a href="#安装Docker-Compose" class="headerlink" title="安装Docker-Compose"></a>安装Docker-Compose</h2><p>可根据官方文档进行安装：<a class="link"   target="_blank" rel="noopener" href="https://docs.docker.com/compose/install/#alternative-install-options" >https://docs.docker.com/compose/install/#alternative-install-options<i class="fas fa-external-link-alt"></i></a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载docker-compose </span></span><br><span class="line">sudo curl -L <span class="string">&quot;https://github.com/docker/compose/releases/download/1.29.2/docker-compose-<span class="subst">$(uname -s)</span>-<span class="subst">$(uname -m)</span>&quot;</span> -o /usr/local/bin/docker-compose</span><br><span class="line"><span class="comment"># 修改docker-compose 权限</span></span><br><span class="line"><span class="built_in">chmod</span> +x /usr/local/bin/docker-compose</span><br><span class="line"><span class="comment"># 创建软链</span></span><br><span class="line"><span class="built_in">ln</span> -s /usr/local/bin/docker-compose /usr/bin/docker-compose</span><br><span class="line"><span class="comment"># 测试</span></span><br><span class="line">docker-compose -v</span><br><span class="line"><span class="comment"># 输出docker-compose version 1.29.2, build 5becea4c</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><h3 id="建立永久的Ghost-和Mariadb-数据存储目录"><a href="#建立永久的Ghost-和Mariadb-数据存储目录" class="headerlink" title="建立永久的Ghost 和Mariadb 数据存储目录"></a>建立永久的Ghost 和Mariadb 数据存储目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建docker-compose.yml 中两个映射Volume 的目录</span></span><br><span class="line"><span class="comment"># 记住修改</span></span><br><span class="line"><span class="built_in">mkdir</span> /home/ray/ghost_data /home/ray/mariadb_data</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="创建独立的Docker-网络"><a href="#创建独立的Docker-网络" class="headerlink" title="创建独立的Docker 网络"></a>创建独立的Docker 网络</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 可选项，如果不需要，则将下面docker-compose.yml 中关于网络设置的部分删除</span></span><br><span class="line">docker network create ghost-network</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="使用compose-启动docker"><a href="#使用compose-启动docker" class="headerlink" title="使用compose 启动docker"></a>使用compose 启动docker</h2><p>在用户根目录创建文件<code>docker-compose.yml</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">vim ~/docker-compose.yml</span><br><span class="line"><span class="comment"># 将下面的内容粘贴到该文件，并保存</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">version: <span class="string">&#x27;2&#x27;</span></span><br><span class="line">services:</span><br><span class="line"><span class="comment"># 使用mariadb 作为后台的数据库</span></span><br><span class="line">  mariadb:</span><br><span class="line">    image: mariadb:10.6.4</span><br><span class="line">    volumes:</span><br><span class="line">    <span class="comment"># 使用/home/ray/mariadb_data 作数据库存储，需要与上一步骤建立的目录保持一致</span></span><br><span class="line">      - <span class="string">&#x27;/home/ray/mariadb_data:/var/lib/mysql&#x27;</span></span><br><span class="line">    environment:</span><br><span class="line">      <span class="comment"># ALLOW_EMPTY_PASSWORD is recommended only for development.</span></span><br><span class="line">      - ALLOW_EMPTY_PASSWORD=no</span><br><span class="line">      <span class="comment"># 下列账号密码根据使用情况自行更改</span></span><br><span class="line">      - MARIADB_ROOT_PASSWORD=xxxxxx</span><br><span class="line">      <span class="comment"># 若Ghost 使用ROOT 账号可以删除下面的USER和PASSWORD</span></span><br><span class="line">      - MARIADB_USER=xxxxxx</span><br><span class="line">      - MARIADB_PASSWORD=xxxxxx</span><br><span class="line">      - MARIADB_DATABASE=ghost_database</span><br><span class="line">      - MARIADB_MASTER_HOST=mariadb</span><br><span class="line">    <span class="comment"># 上一步骤若不进行network 配置则删除该部分</span></span><br><span class="line">    networks:</span><br><span class="line">      - ghost-network</span><br><span class="line">  ghost:</span><br><span class="line">    image: ghost:4.15.0</span><br><span class="line">    <span class="comment"># Ghost 镜像通过外部的3301 端口连接</span></span><br><span class="line">    ports:</span><br><span class="line">      - <span class="string">&#x27;3301:2368&#x27;</span></span><br><span class="line">    volumes:</span><br><span class="line">    <span class="comment"># 使用/home/ray/ghost_data 存储Ghost 数据，需要与上一步骤建立的目录保持一致</span></span><br><span class="line">      - <span class="string">&#x27;/home/ray/ghost_data:/var/lib/ghost/content&#x27;</span></span><br><span class="line">    depends_on:</span><br><span class="line">      - mariadb</span><br><span class="line">    environment:</span><br><span class="line">      <span class="comment"># ALLOW_EMPTY_PASSWORD is recommended only for development.</span></span><br><span class="line">      - url=http://47.107.106.229:3301 <span class="comment"># 注意这里改成自己的公网IP，否则启动博客后页面跳转有问题</span></span><br><span class="line">      - ALLOW_EMPTY_PASSWORD=no</span><br><span class="line">      - GHOST_DATABASE_HOST=mariadb</span><br><span class="line">      - GHOST_DATABASE_PORT_NUMBER=3306</span><br><span class="line">      - GHOST_DATABASE_NAME=ghost_database</span><br><span class="line">      <span class="comment"># 数据库账户和密码与Mariadb 中设置保持一致</span></span><br><span class="line">      - GHOST_DATABASE_USER=root</span><br><span class="line">      - GHOST_DATABASE_PASSWORD=xxxxxx</span><br><span class="line">      - mail__transport=SMTP</span><br><span class="line">      <span class="comment"># 我使用的是qq 邮箱作为SMTP 服务</span></span><br><span class="line">      - mail__options__host=stmp.qq.com</span><br><span class="line">      - mail__options__port=587</span><br><span class="line">      <span class="comment"># 使用自己的邮箱</span></span><br><span class="line">      - mail__options__auth__user=xxxxx@qq.com</span><br><span class="line">      <span class="comment"># 使用邮箱SMTP 的授权码，去邮箱的“设置”-“账号”页面申请，使用QQ密码是不行的</span></span><br><span class="line">      - mail__options__auth__pass=xxxxxxxxxxxxxx</span><br><span class="line">      <span class="comment"># 发件人，可以与auth_user 一致</span></span><br><span class="line">      - mail__from=xxxxx@qq.com</span><br><span class="line">    <span class="comment"># 上一步骤若不进行network 配置则删除该部分</span></span><br><span class="line">    networks:</span><br><span class="line">      - ghost-network</span><br><span class="line"><span class="comment"># 上一步骤若不进行network 配置则删除该部分</span></span><br><span class="line">networks:</span><br><span class="line">    ghost-network:</span><br><span class="line">        external: <span class="literal">true</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>使用<code>docker-compose up</code>拉起服务，第一次拉起会比较慢，因为需要从docker hub 先下载配置中用到的mariadb 和ghost 的docker 镜像。</p>
+<h2 id="配置阿里云防火墙"><a href="#配置阿里云防火墙" class="headerlink" title="配置阿里云防火墙"></a>配置阿里云防火墙</h2><p>在阿里云的控制台，添加规则放通TCP 3301 端口。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/rayd62/blog_images/01/image_1.png"
+                     
+                ></p>
+<h1 id="大功告成"><a href="#大功告成" class="headerlink" title="大功告成"></a>大功告成</h1><p>然后通过浏览器访问<a class="link"   target="_blank" rel="noopener" href="http://47.107.106.229:3301/" >http://47.107.106.229:3301<i class="fas fa-external-link-alt"></i></a> 即可访问博客的主页。</p>
+<p>通过<a class="link"   target="_blank" rel="noopener" href="http://47.107.106.229:3301/ghost" >http://47.107.106.229:3301/ghost<i class="fas fa-external-link-alt"></i></a> 访问Ghost 控制台。</p>
+<h1 id="关于第一次使用注册账号的问题"><a href="#关于第一次使用注册账号的问题" class="headerlink" title="关于第一次使用注册账号的问题"></a>关于第一次使用注册账号的问题</h1><p>我测试过将docker 0 的网络配置中的<code>ipv4.dns</code>设置为外网的DNS 尝试去解析<code>smtp.qq.com</code>尝试了几次都显示失败了。显示无法认证不确定是smtp 账号认证的问题还是dns 的问题。</p>
+<p>不过在发送邮件之后遇到报错，直接刷新页面，然后使用刚刚填写的账号密码也可以直接进入ghost 的管理页面。</p>
+<blockquote>
+<p>最后在GitHub上找到一个case ，大意是说docker-compose 的方式需要额外加入<code>network_mode: network_mode: bridge</code> 可以解决问题。但因为博客更换为Hexo 搭建，并没有做进一步尝试。</p>
+</blockquote>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：使用Docker 搭建Ghost</li>
+        <li>本文作者：Rayd62</li>
+        <li>创建时间：2022-01-04 04:45:53</li>
+        <li>
+            本文链接：https://blog.hf2.space/2022/01/04/1.使用Docker-搭建Ghost/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%BB%BA%E7%AB%99/">#建站</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E5%85%AC%E6%9C%89%E4%BA%91/">#公有云</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/01/05/2.HTTP-%E5%9F%BA%E7%A1%80/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">HTTP 基础</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Rayd62</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Docker"><span class="nav-number">2.</span> <span class="nav-text">安装Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="nav-number">2.1.</span> <span class="nav-text">安装依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%98%BF%E9%87%8C%E4%BA%91%E7%9A%84%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93"><span class="nav-number">2.2.</span> <span class="nav-text">配置阿里云的镜像仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0yum-%E6%BA%90"><span class="nav-number">2.3.</span> <span class="nav-text">更新yum 源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Docker-%E7%A8%8B%E5%BA%8F"><span class="nav-number">2.4.</span> <span class="nav-text">安装Docker 程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8Docker"><span class="nav-number">2.5.</span> <span class="nav-text">启动Docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%98%BF%E9%87%8C%E4%BA%91Docker%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F"><span class="nav-number">2.6.</span> <span class="nav-text">配置阿里云Docker镜像加速</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Docker-Compose-%E5%90%AF%E5%8A%A8Ghost"><span class="nav-number">3.</span> <span class="nav-text">使用Docker-Compose 启动Ghost</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Docker-Compose"><span class="nav-number">3.1.</span> <span class="nav-text">安装Docker-Compose</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="nav-number">3.2.</span> <span class="nav-text">环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E6%B0%B8%E4%B9%85%E7%9A%84Ghost-%E5%92%8CMariadb-%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%9B%AE%E5%BD%95"><span class="nav-number">3.2.1.</span> <span class="nav-text">建立永久的Ghost 和Mariadb 数据存储目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%8B%AC%E7%AB%8B%E7%9A%84Docker-%E7%BD%91%E7%BB%9C"><span class="nav-number">3.2.2.</span> <span class="nav-text">创建独立的Docker 网络</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8compose-%E5%90%AF%E5%8A%A8docker"><span class="nav-number">3.3.</span> <span class="nav-text">使用compose 启动docker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E9%98%BF%E9%87%8C%E4%BA%91%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">3.4.</span> <span class="nav-text">配置阿里云防火墙</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A4%A7%E5%8A%9F%E5%91%8A%E6%88%90"><span class="nav-number">4.</span> <span class="nav-text">大功告成</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%BD%BF%E7%94%A8%E6%B3%A8%E5%86%8C%E8%B4%A6%E5%8F%B7%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">5.</span> <span class="nav-text">关于第一次使用注册账号的问题</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="功成不必在我 功力必不唐捐">
+    <meta name="author" content="Rayd62">
+    
+    <title>
+        
+            信号在网线中传输 |
+        
+        Laplace&#39; Café
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"blog.hf2.space","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"功成不必在我 功力必不唐捐"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Laplace&#39; Café
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">信号在网线中传输</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Rayd62</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-02-11 08:39:28</span>
+        <span class="mobile">2022-02-11 08:39</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">读书笔记</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF/">网络技术</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84/">网络是怎样连接的</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="每个包都是独立传输的"><a href="#每个包都是独立传输的" class="headerlink" title="每个包都是独立传输的"></a>每个包都是独立传输的</h1><p> 两个终端间的数据传输，依赖于两个设备间的集线器、交换机、路由器等转发设备将终端发出的包转发，最终抵达对端。</p>
+<p>这个过程中，交换机、路由器等转发设备使用数据包的控制信息（可以是MAC，也可以是IP），在设备内部的一个记录转发规则的表中查询，从而判断数据包的去向（下一跳）。</p>
+<p>所以转发设备只关心数据包的头部控制信息而不关心数据包的数据内容。</p>
+<p>这可以与快递员进行类比，快递员在派送快递时只关心快递的面单，而不关心包裹内装的是什么。</p>
+<span id="more"></span>
+
+<h1 id="防止网线中的信号衰减"><a href="#防止网线中的信号衰减" class="headerlink" title="防止网线中的信号衰减"></a>防止网线中的信号衰减</h1><p>此处只探讨电信号的问题，光纤的光信号衰减是另一个话题。</p>
+<h2 id="为什么会产生信号衰减（失真）"><a href="#为什么会产生信号衰减（失真）" class="headerlink" title="为什么会产生信号衰减（失真）"></a>为什么会产生信号衰减（失真）</h2><ol>
+<li>信号在网线的传输过程中，能量会逐渐损失。网线越长，信号衰减越严重</li>
+<li>电信号的频率越高（频率高，意味着速度快），能量的损失也越大（高频信号会释放更多的电磁波，这些电磁波带走了一部分能量，也造成了能量的损失）</li>
+<li>线路噪音：网线周围的电磁波，当电磁波接触到金属等导体时，其中就会产生电流。因此，双绞线周围存在电磁波就会对网线中原有的信号产生干扰</li>
+</ol>
+<h2 id="衰减对数据的传输有什么影响"><a href="#衰减对数据的传输有什么影响" class="headerlink" title="衰减对数据的传输有什么影响"></a>衰减对数据的传输有什么影响</h2><p>信号在传输过程中不断衰减，波形就会失真，导致接收方难以辨别信号的实际意义。（在双绞线中电信号实际就是高低电压的变换，当电压的高低变换产生失真，接收方将无法准确判断电压的高低变换情况，也就无法在目的地将电信号转化成发送方希望发送的数字信号了）</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/rayd62/blog_images/%E4%BF%A1%E5%8F%B7%E5%9C%A8%E7%BD%91%E7%BA%BF%E4%B8%AD%E4%BC%A0%E8%BE%93/Untitled.png"
+                      alt="Untitled"
+                ></p>
+<h2 id="如何解决电信号衰减的问题"><a href="#如何解决电信号衰减的问题" class="headerlink" title="如何解决电信号衰减的问题"></a>如何解决电信号衰减的问题</h2><p>产生信号衰减的原因1、2 并没有很好的办法，只能在实际的项目中缩短互联的设备之间的电缆长度。通常来说不应该使用200m 以上的双绞线，超过200m 的距离，就应该将电缆替换成光纤。</p>
+<p>而对于线路的噪音，局域网中各个设备网卡之间通常连接的双绞线就是为了抑制电磁波噪音干扰的，其中“双绞”的意思是以两根信号线为一组缠绕在一起。</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/rayd62/blog_images/%E4%BF%A1%E5%8F%B7%E5%9C%A8%E7%BD%91%E7%BA%BF%E4%B8%AD%E4%BC%A0%E8%BE%93/Untitled%201.png"
+                      alt="图中一根双绞线中有4对信号线互相缠绕"
+                ></p>
+<h3 id="网线之外电磁波产生的影响-外源性噪声"><a href="#网线之外电磁波产生的影响-外源性噪声" class="headerlink" title="网线之外电磁波产生的影响 - 外源性噪声"></a>网线之外电磁波产生的影响 - 外源性噪声</h3><p>很多电器产品都会产生电磁波，例如电机、荧光灯、CRT 显示器、电磁炉等等。对于网线来说，这类电磁波干扰属于外源性噪声。</p>
+<blockquote>
+<p>首先，信号线是用金属做成的，当电磁波接触到信号线时，会沿电磁波传播的右旋方向产生电流，这种电流会导致波形发生失真。如果我们将信号线缠绕在一起，信号线就变成了螺旋形，其中两根信号线中产生的噪声电流方向就会相反，从而使得噪声电流相互抵消，噪声就得到了抑制（如下图）。</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/rayd62/blog_images/%E4%BF%A1%E5%8F%B7%E5%9C%A8%E7%BD%91%E7%BA%BF%E4%B8%AD%E4%BC%A0%E8%BE%93/Untitled%202.png"
+                      alt="Untitled"
+                ></p>
+<h3 id="网线内相邻网线产生的电磁波的影响-内源性噪声"><a href="#网线内相邻网线产生的电磁波的影响-内源性噪声" class="headerlink" title="网线内相邻网线产生的电磁波的影响 - 内源性噪声"></a>网线内相邻网线产生的电磁波的影响 - 内源性噪声</h3><p>另一种电磁波是从网线中相邻的信号线泄漏的。由于电缆中信号本身就是一种电流，它也会相应的产生电磁波。虽然这种电磁波非常的微弱，但由于相邻的信号线之间距离过于靠近，这类电流也能产生出影响相邻信号线的电磁波。</p>
+<blockquote>
+<p>要抑制这种噪声，关键在于双绞线的缠绕方式。在一根网线中，每一对信号线的扭绞间隔（节距）都有一定的差异，这使得在某些地方正信号线距离近，另一些地方则是负信号线距离近。由于正负信号线产生的噪声影响是相反的，所以两者就会相互抵消。从网线整体来看，正负的分布保持平衡，自然就会削弱噪声的影响。（如下图）</p>
+</blockquote>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/rayd62/blog_images/%E4%BF%A1%E5%8F%B7%E5%9C%A8%E7%BD%91%E7%BA%BF%E4%B8%AD%E4%BC%A0%E8%BE%93/Untitled%203.png"
+                      alt="Untitled"
+                ></p>
+<h3 id="通过提升网线工艺来降低噪音影响"><a href="#通过提升网线工艺来降低噪音影响" class="headerlink" title="通过提升网线工艺来降低噪音影响"></a>通过提升网线工艺来降低噪音影响</h3><p>例如在信号线之间加入隔板保持距离，以及在外面包裹可阻挡电磁波的金属屏蔽网等。</p>
+<table>
+<thead>
+<tr>
+<th>类</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>五类（CAT-5）</td>
+<td>用于 10 Mbit&#x2F;s（10BASE-T）和 100 Mbit&#x2F;s（100BASE-TX）以太网，可以最高 125 MHz 的频率在最长 100 米的距离内传输信号</td>
+</tr>
+<tr>
+<td>超五类（CAT-5e）</td>
+<td>用于千兆（1000BASE-T）以太网，对五类网线进行了改良，改善了串扰，也向下兼容 10BASE-T 和 100BASE-TX</td>
+</tr>
+<tr>
+<td>六类（CAT-6）</td>
+<td>支持最高 250 MHz 的信号传输，用于 1000BASE-TX 规格的千兆以太网和 10GBASE-T 规格的万兆以太网，同时向下兼容 10BASE-T、100BASE-TX 和 1000BASE-T</td>
+</tr>
+<tr>
+<td>超六类（CAT-6A）</td>
+<td>对六类网线进行了改良，改善了外部串扰，兼容 10GBASE-T、1000BASE-TX、1000BASE-T、100BASE-TX 和 10BASE-T</td>
+</tr>
+<tr>
+<td>七类（CAT-7）</td>
+<td>支持最高 600 MHz 的高速信号传输，兼容 10GBASE-T、1000BASE-TX、1000BASE-T、100BASE-TX 和 10BASE-T</td>
+</tr>
+</tbody></table>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：信号在网线中传输</li>
+        <li>本文作者：Rayd62</li>
+        <li>创建时间：2022-02-11 08:39:28</li>
+        <li>
+            本文链接：https://blog.hf2.space/2022/02/11/13.信号在网线中传输/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">#读书笔记</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF/">#网络技术</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84/">#网络是怎样连接的</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/02/22/14.%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%92%8C%E8%B7%AF%E7%94%B1%E5%99%A8/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">交换机和路由器</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/01/19/12.%E5%B0%86IP-%E5%8C%85%E5%8F%91%E9%80%81%E5%87%BA%E5%8E%BB/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">将IP 包发送出去</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Rayd62</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AF%8F%E4%B8%AA%E5%8C%85%E9%83%BD%E6%98%AF%E7%8B%AC%E7%AB%8B%E4%BC%A0%E8%BE%93%E7%9A%84"><span class="nav-number">1.</span> <span class="nav-text">每个包都是独立传输的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%98%B2%E6%AD%A2%E7%BD%91%E7%BA%BF%E4%B8%AD%E7%9A%84%E4%BF%A1%E5%8F%B7%E8%A1%B0%E5%87%8F"><span class="nav-number">2.</span> <span class="nav-text">防止网线中的信号衰减</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E4%BA%A7%E7%94%9F%E4%BF%A1%E5%8F%B7%E8%A1%B0%E5%87%8F%EF%BC%88%E5%A4%B1%E7%9C%9F%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">为什么会产生信号衰减（失真）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%B0%E5%87%8F%E5%AF%B9%E6%95%B0%E6%8D%AE%E7%9A%84%E4%BC%A0%E8%BE%93%E6%9C%89%E4%BB%80%E4%B9%88%E5%BD%B1%E5%93%8D"><span class="nav-number">2.2.</span> <span class="nav-text">衰减对数据的传输有什么影响</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E7%94%B5%E4%BF%A1%E5%8F%B7%E8%A1%B0%E5%87%8F%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.3.</span> <span class="nav-text">如何解决电信号衰减的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BA%BF%E4%B9%8B%E5%A4%96%E7%94%B5%E7%A3%81%E6%B3%A2%E4%BA%A7%E7%94%9F%E7%9A%84%E5%BD%B1%E5%93%8D-%E5%A4%96%E6%BA%90%E6%80%A7%E5%99%AA%E5%A3%B0"><span class="nav-number">2.3.1.</span> <span class="nav-text">网线之外电磁波产生的影响 - 外源性噪声</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BA%BF%E5%86%85%E7%9B%B8%E9%82%BB%E7%BD%91%E7%BA%BF%E4%BA%A7%E7%94%9F%E7%9A%84%E7%94%B5%E7%A3%81%E6%B3%A2%E7%9A%84%E5%BD%B1%E5%93%8D-%E5%86%85%E6%BA%90%E6%80%A7%E5%99%AA%E5%A3%B0"><span class="nav-number">2.3.2.</span> <span class="nav-text">网线内相邻网线产生的电磁波的影响 - 内源性噪声</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E6%8F%90%E5%8D%87%E7%BD%91%E7%BA%BF%E5%B7%A5%E8%89%BA%E6%9D%A5%E9%99%8D%E4%BD%8E%E5%99%AA%E9%9F%B3%E5%BD%B1%E5%93%8D"><span class="nav-number">2.3.3.</span> <span class="nav-text">通过提升网线工艺来降低噪音影响</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
