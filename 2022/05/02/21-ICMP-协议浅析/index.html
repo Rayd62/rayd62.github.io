@@ -188,12 +188,13 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="ICMP-重定向"><a href="#ICMP-重定向" class="headerlink" title="ICMP 重定向"></a>ICMP 重定向</h1><p>ICMP: Internet Control Message Protocol<br>互联网控制信息协议是IP 层的一个辅助协议。用来在网络设备传递各种差错和控制信息。<br><img  
+            <h1 id="ICMP"><a href="#ICMP" class="headerlink" title="ICMP"></a>ICMP</h1><p>ICMP: Internet Control Message Protocol<br>互联网控制信息协议是IP 层的一个辅助协议。用来在网络设备传递各种差错和控制信息。<br><img  
                      lazyload
                      src="/images/loading.svg"
                      data-src="https://cdn.jsdelivr.net/gh/Rayd62/note_images/202205011652691.png"
                      
                 ></p>
+<p>常用的ICMP 类型</p>
 <table>
 <thead>
 <tr>
@@ -238,7 +239,7 @@
 <td>Echo Request</td>
 </tr>
 </tbody></table>
-<h1 id="ICMP-重定向-1"><a href="#ICMP-重定向-1" class="headerlink" title="ICMP 重定向"></a>ICMP 重定向</h1><p>ICMP重定向报文是ICMP 控制报文的一种。<br><img  
+<h1 id="ICMP-重定向"><a href="#ICMP-重定向" class="headerlink" title="ICMP 重定向"></a>ICMP 重定向</h1><p>ICMP重定向报文是ICMP 控制报文的一种。<br><img  
                      lazyload
                      src="/images/loading.svg"
                      data-src="https://cdn.jsdelivr.net/gh/Rayd62/note_images/202205011706161.png"
@@ -547,7 +548,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ICMP-%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">1.</span> <span class="nav-text">ICMP 重定向</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ICMP-%E9%87%8D%E5%AE%9A%E5%90%91-1"><span class="nav-number">2.</span> <span class="nav-text">ICMP 重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E9%80%81ICMP-redirect-%E6%9D%A1%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">发送ICMP redirect 条件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ICMP-%E9%94%99%E8%AF%AF%E6%8A%A5%E5%91%8A"><span class="nav-number">3.</span> <span class="nav-text">ICMP 错误报告</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#net-unreachable"><span class="nav-number">3.1.</span> <span class="nav-text">net unreachable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#protocol-unreachable"><span class="nav-number">3.2.</span> <span class="nav-text">protocol unreachable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fragmentation-needed-and-DF-set"><span class="nav-number">3.3.</span> <span class="nav-text">fragmentation needed and DF set</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ICMP-%E8%B6%85%E6%97%B6%E6%8A%A5%E6%96%87"><span class="nav-number">4.</span> <span class="nav-text">ICMP 超时报文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TTL-%E4%BC%A0%E8%BE%93%E8%B6%85%E6%97%B6"><span class="nav-number">4.1.</span> <span class="nav-text">TTL 传输超时</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP-%E9%87%8D%E7%BB%84%E8%B6%85%E6%97%B6"><span class="nav-number">4.2.</span> <span class="nav-text">IP 重组超时</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%BA%90%E6%8A%91%E5%88%B6%E6%B6%88%E6%81%AF-Source-Quench-Message"><span class="nav-number">5.</span> <span class="nav-text">源抑制消息 - Source Quench Message</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ICMP"><span class="nav-number">1.</span> <span class="nav-text">ICMP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ICMP-%E9%87%8D%E5%AE%9A%E5%90%91"><span class="nav-number">2.</span> <span class="nav-text">ICMP 重定向</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E9%80%81ICMP-redirect-%E6%9D%A1%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">发送ICMP redirect 条件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ICMP-%E9%94%99%E8%AF%AF%E6%8A%A5%E5%91%8A"><span class="nav-number">3.</span> <span class="nav-text">ICMP 错误报告</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#net-unreachable"><span class="nav-number">3.1.</span> <span class="nav-text">net unreachable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#protocol-unreachable"><span class="nav-number">3.2.</span> <span class="nav-text">protocol unreachable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fragmentation-needed-and-DF-set"><span class="nav-number">3.3.</span> <span class="nav-text">fragmentation needed and DF set</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ICMP-%E8%B6%85%E6%97%B6%E6%8A%A5%E6%96%87"><span class="nav-number">4.</span> <span class="nav-text">ICMP 超时报文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TTL-%E4%BC%A0%E8%BE%93%E8%B6%85%E6%97%B6"><span class="nav-number">4.1.</span> <span class="nav-text">TTL 传输超时</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP-%E9%87%8D%E7%BB%84%E8%B6%85%E6%97%B6"><span class="nav-number">4.2.</span> <span class="nav-text">IP 重组超时</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%BA%90%E6%8A%91%E5%88%B6%E6%B6%88%E6%81%AF-Source-Quench-Message"><span class="nav-number">5.</span> <span class="nav-text">源抑制消息 - Source Quench Message</span></a></li></ol>
     </div>
 </div>
         </aside>
