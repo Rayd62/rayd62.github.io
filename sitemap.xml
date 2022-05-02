@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.hf2.space/2022/05/02/21-ICMP-%E5%8D%8F%E8%AE%AE%E6%B5%85%E6%9E%90/</loc>
+    
+    <lastmod>2022-05-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.hf2.space/2022/04/02/17-%E4%BD%BF%E7%94%A8ocserv-%E5%9C%A8Ubuntu-20-04-%E4%B8%8A%E6%90%AD%E5%BB%BASSLVPN/</loc>
+    
+    <lastmod>2022-05-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.hf2.space/2022/05/02/20.CentOS7.4%E5%AE%89%E8%A3%85%E5%BC%82%E5%B8%B8-starting%20dracut%20initqueue%20hook/</loc>
     
     <lastmod>2022-05-02</lastmod>
@@ -14,15 +32,6 @@
     <loc>https://blog.hf2.space/2022/05/02/19-DELL-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9D%E5%A7%8B%E5%8C%96/</loc>
     
     <lastmod>2022-05-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.hf2.space/2022/04/02/17-%E4%BD%BF%E7%94%A8ocserv-%E5%9C%A8Ubuntu-20-04-%E4%B8%8A%E6%90%AD%E5%BB%BASSLVPN/</loc>
-    
-    <lastmod>2022-04-02</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -252,13 +261,6 @@
   
   <url>
     <loc>https://blog.hf2.space/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
-    <lastmod>2022-05-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.hf2.space/tags/%E7%BD%91%E7%BB%9C/</loc>
     <lastmod>2022-05-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
