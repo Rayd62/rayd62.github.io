@@ -196,6 +196,7 @@
 <p>我们可以通过iptalbes 等防火墙技术来配置SNAT 达到远程访问服务器环回地址的作用，但这样做有几个不妥之处：1. 我们需要将一个debug 的进程暴露给公网，且该进程是没有提供用户身份认证服务的； 2. hexo server 提供的是HTTP 的页面访问，并没有使用HTTPS 对相关流量进行加密。</p>
 <p>后来通过搜索文档，我找到了一个使用SSH 来将本地端口和远程服务器端口绑定的一种方法，在此分享给大家。</p>
 <span id="more"></span>
+
 <h1 id="SSH-的配置"><a href="#SSH-的配置" class="headerlink" title="SSH 的配置"></a>SSH 的配置</h1><p>搜索SSH 的man page，可以看到对<code>-L</code>的注释如下：</p>
 <blockquote>
 <p>Specifies that connections to the given TCP port or Unix socket on the local (client) host are to be forwarded to the given host and port, or Unix socket, on the remote side.  This works by allocating a socket to listen to either a TCP port on the local side, ptionally bound to the specified bind_address, or to a Unix socket.  Whenever a connection is made to the local port or socket, the connection is forwarded over the secure channel, and a connection is made to either host port hostport, or the Unix socket remote_socket, from the remote machine.<br>指定要将与本地(客户端)主机上给定TCP端口或Unix套接字的连接转发到远程端的给定主机和端口或Unix套接字。这是通过分配套接字来侦听本地端的TCP端口(临时绑定到指定的BIND_ADDRESS或Unix套接字)来实现的。每当连接到本地端口或套接字时，都会通过安全通道转发连接，并从远程计算机建立到主机端口hostport或Unix套接字remote_socket的连接。</p>
@@ -204,16 +205,13 @@
 
 
 <h2 id="指定本地端口转发到服务器端4000-端口"><a href="#指定本地端口转发到服务器端4000-端口" class="headerlink" title="指定本地端口转发到服务器端4000 端口"></a>指定本地端口转发到服务器端4000 端口</h2><p>所以如果我希望在本地浏览<code>hexo</code>服务器的<code>localhost:4000</code>端口，我可以在terminal 使用如下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将发送到本地的4000 端口的流量转发到远程服务器149.28.131.106 的127.0.0.1:4000 </span></span><br><span class="line">ssh -L 4000:127.0.0.1:4000 [root@149.28.131.106](mailto:root@149.28.131.106)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 将发送到本地的4000 端口的流量转发到远程服务器149.28.131.106 的127.0.0.1:4000 </span></span><br><span class="line">ssh -L 4000:127.0.0.1:4000 root@149.28.131.106</span><br></pre></td></tr></table></figure>
 
 
 <h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><ol>
-<li><p>打开hexo 博客的server 模式<code>hexo server --debug</code>：</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 得到提示</span></span><br><span class="line">04:49:51.611 INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.</span><br><span class="line">04:49:51.626 DEBUG Database saved</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在本地terminal （终端）中，输入<code>ssh -L 4000:127.0.0.1:4000 root@149.28.131.106</code> </p>
-</li>
-<li><p>使用浏览器打开<code>localhost:4000</code>页面，如果成功打开博客主页且服务器端debug 进程有连接请求，则配置成功<br> <img  
+<li>打开hexo 博客的server 模式<code>hexo server --debug</code>：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 得到提示</span></span><br><span class="line">04:49:51.611 INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.</span><br><span class="line">04:49:51.626 DEBUG Database saved</span><br></pre></td></tr></table></figure></li>
+<li>在本地terminal （终端）中，输入<code>ssh -L 4000:127.0.0.1:4000 root@149.28.131.106</code> </li>
+<li>使用浏览器打开<code>localhost:4000</code>页面，如果成功打开博客主页且服务器端debug 进程有连接请求，则配置成功<br> <img  
                      lazyload
                      src="/images/loading.svg"
                      data-src="https://cdn.jsdelivr.net/gh/rayd62/blog_images/03/image.png"
@@ -223,8 +221,7 @@
                      src="/images/loading.svg"
                      data-src="https://cdn.jsdelivr.net/gh/rayd62/blog_images/03/image_1.png"
                      
-                ></p>
-</li>
+                ></li>
 </ol>
 
         </div>
