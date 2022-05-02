@@ -9,7 +9,7 @@
     
     <title>
         
-            标签 |
+            19.DELL 服务器初始化 |
         
         Laplace&#39; Café
     </title>
@@ -80,7 +80,7 @@
                         </li>
                     
                         <li class="menu-item">
-                            <a class="active"
+                            <a class=""
                                href="/tags"
                             >
                                 标签
@@ -119,7 +119,7 @@
                 </li>
             
                 <li class="drawer-menu-item flex-center">
-                    <a class="active"
+                    <a class=""
                        href="/tags">标签</a>
                 </li>
             
@@ -138,15 +138,212 @@
             <div class="main-content">
 
                 
-                    
-    <div class="fade-in-down-animation">
-        <div class="tagcloud-container">
-            <div class="tagcloud-content">
-                <a href="/tags/Proxmox-VE/" style="font-size: 1rem;">Proxmox VE</a> <a href="/tags/%E5%85%AC%E6%9C%89%E4%BA%91/" style="font-size: 1rem;">公有云</a> <a href="/tags/%E5%BB%BA%E7%AB%99/" style="font-size: 1.15rem;">建站</a> <a href="/tags/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E8%AF%BB%E8%B4%A2%E6%8A%A5/" style="font-size: 1rem;">手把手教你读财报</a> <a href="/tags/%E6%8A%95%E8%B5%84%E7%90%86%E8%B4%A2/" style="font-size: 1rem;">投资理财</a> <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 1rem;">服务器</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 1rem;">网络</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF/" style="font-size: 1.45rem;">网络技术</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%9E%E6%8E%A5%E7%9A%84/" style="font-size: 1.45rem;">网络是怎样连接的</a> <a href="/tags/%E8%99%9A%E6%8B%9F%E5%8C%96/" style="font-size: 1rem;">虚拟化</a> <a href="/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" style="font-size: 1.6rem;">读书笔记</a> <a href="/tags/%E8%BF%90%E7%BB%B4/" style="font-size: 1.3rem;">运维</a>
-            </div>
-        </div>
-    </div>
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
 
+        <div class="article-title">
+            <span class="title-hover-animation">19.DELL 服务器初始化</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Rayd62</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-05-02 18:02:23</span>
+        <span class="mobile">2022-05-02 18:02</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E8%BF%90%E7%BB%B4/">运维</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="服务器安装"><a href="#服务器安装" class="headerlink" title="服务器安装"></a>服务器安装</h1><ol>
+<li><p>在服务器上，前面板配置iDRAC 地址</p>
+</li>
+<li><p>在网页上使用该地址打开iDRAC 管理页面<br> <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Rayd62/note_images/202204201411553.png"
+                     
+                ></p>
+</li>
+<li><p>使用iDRAC 默认账号: root 默认密码: calvin 登录系统，首次登陆会提示修改iDRAC 密码</p>
+</li>
+<li><p>首页右下角有HTML 版本的控制台，点击打开<br> <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Rayd62/note_images/202204201412623.png"
+                     
+                ></p>
+</li>
+<li><p>如果需要进行RAID 阵列卡配置，首先需要修改BIOS 启动配置，将其从UEFI 更改为BIOS</p>
+</li>
+<li><p>保存BIOS 配置，重启系统，根据提示按ctrl + r 进入阵列卡配置界面，按需进行配置<br> <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Rayd62/note_images/202204201412277.png"
+                     
+                ><br> 有直通需求的硬盘需要在PD Mgmt 中修改为Non-RAID</p>
+</li>
+<li><p>修改完配置，点击控制台软件，点击引用键盘宏”ctrl+alt+del” 重启机器<br> <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Rayd62/note_images/202204201412930.png"
+                     
+                ></p>
+</li>
+<li><p>挂载虚拟截至（系统的ISO 文件），并在启动中将启动项修改为虚拟CD&#x2F;DVD&#x2F;ISO<br> <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Rayd62/note_images/202204201412670.png"
+                     
+                ></p>
+</li>
+<li><p>重启后注意查看启动是否为虚拟DVD，直通硬盘是否正常被识别。<br> <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Rayd62/note_images/202204201412013.png"
+                     
+                ></p>
+</li>
+<li><p>等待一段时间，正式进入系统安装界面，下面是RHEL 7.6 的安装步骤。</p>
+</li>
+<li><p>选择语言</p>
+</li>
+<li><p>配置系统时间<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Rayd62/note_images/202204201413363.png"
+                     
+                ></p>
+</li>
+<li><p>设置语言英文+中文的语言支持<br><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Rayd62/note_images/202204201413461.png"
+                     
+                ></p>
+</li>
+<li><p>配置系统盘分区</p>
+<ol>
+<li>选择系统盘，选择手动分区，选择“Done”<br> <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Rayd62/note_images/202204201413260.png"
+                     
+                ></li>
+<li>删除可能存在的已有分区，按照应用组要求，进行相应的系统盘分区<br> <img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Rayd62/note_images/202204201413540.png"
+                     
+                ></li>
+<li>完成配置后，选择”Done“ 完成配置</li>
+</ol>
+</li>
+<li><p>取消kdump</p>
+</li>
+<li><p>开始安装，进行root 账号配置</p>
+</li>
+<li><p>等待安装完成</p>
+</li>
+</ol>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：19.DELL 服务器初始化</li>
+        <li>本文作者：Rayd62</li>
+        <li>创建时间：2022-05-02 18:02:23</li>
+        <li>
+            本文链接：https://blog.hf2.space/2022/05/02/19-DELL-服务器初始化/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E8%BF%90%E7%BB%B4/">#运维</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/">#服务器</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/04/02/18-%E5%BC%80%E5%90%AFPVE-%E5%AE%BF%E4%B8%BB%E6%9C%BA%E7%9A%84nested%E8%99%9A%E6%8B%9F%E5%8C%96/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">18.开启PVE 宿主机的nested虚拟化</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
 
 
                 
@@ -177,6 +374,23 @@
         </div>
     </div>
 
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
     
 
     <div class="right-bottom-side-tools">
@@ -222,6 +436,14 @@
 
     </div>
 
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">服务器安装</span></a></li></ol>
+    </div>
+</div>
+        </aside>
     
 
     <div class="image-viewer-container">
@@ -279,6 +501,8 @@
 
 
 <div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
     
 </div>
 
