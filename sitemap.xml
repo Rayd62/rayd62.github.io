@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.hf2.space/2022/05/23/26-ARP-%E8%A7%A3%E6%9E%90/</loc>
+    
+    <lastmod>2022-05-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.hf2.space/2022/05/23/25-HSRP-Hot-Standby-Router-Protocol/</loc>
     
     <lastmod>2022-05-23</lastmod>
