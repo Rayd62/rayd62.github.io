@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="功成不必在我 功力必不唐捐">
+    <meta name="author" content="Rayd62">
+    
+    <title>
+        
+            24.HSRP - Hot Standby Router Protocol |
+        
+        Laplace&#39; Café
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"blog.hf2.space","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"功成不必在我 功力必不唐捐"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Laplace&#39; Café
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">24.HSRP - Hot Standby Router Protocol</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Rayd62</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-05-23 18:14:10</span>
+        <span class="mobile">2022-05-23 18:14</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF/">网络技术</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="HSRP-Hot-Standby-Router-Protocol"><a href="#HSRP-Hot-Standby-Router-Protocol" class="headerlink" title="HSRP(Hot Standby Router Protocol)"></a>HSRP(Hot Standby Router Protocol)</h1><p>在网络边界设备或接入链路上部署HSRP 可以迅速地、无感知地避免用户发生第一跳故障（first-hop failure ）的情况。同样属于FHRP(First Hop Redundancy Protocol) 的协议还有Virtual Router Redundancy Protocol (VRRP) 和Gateway Load Balancing Protocol(GLBP).</p>
+<h1 id="HSRP-的背景"><a href="#HSRP-的背景" class="headerlink" title="HSRP 的背景"></a>HSRP 的背景</h1><h2 id="为什么是HSRP-来保障主机访问其它网络的弹性？"><a href="#为什么是HSRP-来保障主机访问其它网络的弹性？" class="headerlink" title="为什么是HSRP 来保障主机访问其它网络的弹性？"></a>为什么是HSRP 来保障主机访问其它网络的弹性？</h2><p>虽然主机上有多种可以不熟的动态路由器发现机制（Dynamic Router Discovery Mechanism），但这些机制大多都不会帮助网络管理员提供他所需要的网络弹性（故障恢复）。因为DRDM 开发的初衷并非是为主机提供网络弹性；同时还需要注意的是，绝大多数的主机在配置是只允许管理员配置一个默认网关（default gateway）。</p>
+<h3 id="Proxy-ARP（ARP-代答）"><a href="#Proxy-ARP（ARP-代答）" class="headerlink" title="Proxy ARP（ARP 代答）"></a>Proxy ARP（ARP 代答）</h3><p>部署ARP 代答的设备，在访问其它网络时会通过发送ARP 包请求远端主机的IP 对应的MAC 地址。而连接了该网络的网络设备（路由器或三层交换机）会将自己的MAC 地址作为 ARP 回复发送给主机，这样主机就能将数据包交给正确的网关。如果此时这台网络设备故障，那么主机必须等待本机ARP 表老化，重发ARP 请求远端主机IP 对应的MAC 地址，并得到另一网关设备的正确答复，才能恢复通信。（win 10, win srv 2012 的默认ARP 老化时间为30s）</p>
+<h3 id="Dynamic-Routing-Protocol-（动态路由协议）"><a href="#Dynamic-Routing-Protocol-（动态路由协议）" class="headerlink" title="Dynamic Routing Protocol （动态路由协议）"></a>Dynamic Routing Protocol （动态路由协议）</h3><p>从管理、操作、安全等等角度来看，在所有主机上运行动态路由协议来避免网关丢失（第一跳故障）是不可行的。<br>同时，并非所有的主机都能支持动态路由协议。</p>
+<h3 id="ICMP-Router-DIscovery-Protocol-（ICMP-路由器发现协议）"><a href="#ICMP-Router-DIscovery-Protocol-（ICMP-路由器发现协议）" class="headerlink" title="ICMP Router DIscovery Protocol （ICMP 路由器发现协议）"></a>ICMP Router DIscovery Protocol （ICMP 路由器发现协议）</h3><p>一些主机上部署有ICMP Router Discovery Protocol（IRDP， <a class="link"   target="_blank" rel="noopener" href="http://www.faqs.org/rfcs/rfc1256.html" >RFC 1256<i class="fas fa-external-link-alt"></i></a>），该协议能够在路由失效时为主机寻找新的网关设备。一个部署了IRDP 的主机会侦听来来自路由器（路由器需要做相应的配置）的Hello 组播包，当主机不再收到来自路由器的Hello 组播包时能切换另一台路由器作为新的网关设备。默认Advertisement 速率为每7到10分钟一次，默认生存期为30分钟。这决定了使用 IRDP 不适合作为网关设备故障探测的手段。</p>
+<h3 id="Dynamic-Host-Configuration-Protocol-（DHCP）"><a href="#Dynamic-Host-Configuration-Protocol-（DHCP）" class="headerlink" title="Dynamic Host Configuration Protocol （DHCP）"></a>Dynamic Host Configuration Protocol （DHCP）</h3><p>在TCP&#x2F;IP 网络中，DHCP 为主机提供网络配置下发的能力。但DHCP 并不具备在网关设备故障时，向已有配置的主机重新下发新的默认网关的能力。</p>
+<h3 id="HSRP-是怎么解决网关失效的问题？"><a href="#HSRP-是怎么解决网关失效的问题？" class="headerlink" title="HSRP 是怎么解决网关失效的问题？"></a>HSRP 是怎么解决网关失效的问题？</h3><p>使用HSRP，一组（两个或以上）网关设备（路由器&#x2F;交换机）协同工作，向局域网上的主机呈现单个虚拟路由器的假象。<br>组中的单台网关设备被选举来负责转发所有来自子网内主机发送到虚拟路由器的流量。这台网关设备被称为活动路由器（Active Router）。其它组内的网关设备都被选举为备用路由器（Standby Router）。当活动路由器故障时，备用路由器承担活动路由器的转发职责。需要注意的是，即使存在多台网关设备，只有活动路由器能够转发流量。</p>
+<h1 id="HSRP-的工作模式"><a href="#HSRP-的工作模式" class="headerlink" title="HSRP 的工作模式"></a>HSRP 的工作模式</h1><h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p><code>Active Rotuer</code>: 指当前为虚拟路由器转发流量的活动路由器</p>
+<p><code>Standby Router</code>: 指主备用路由器</p>
+<p><code>Standby Group</code>: 参与模拟虚拟路由器的一组路由器</p>
+<p><code>Hello Time</code>: 来自给定路由器的连续HSRP Hello消息之间的间隔</p>
+<p><code>Hold Time</code>: 从收到Hello消息到假定发送路由器出现故障之间的时间间隔</p>
+<h2 id="HSRP-选举"><a href="#HSRP-选举" class="headerlink" title="HSRP 选举"></a>HSRP 选举</h2><p>HSRP 有两个主要角色（Role）Active 和Standby。路由器是否能进入某个角色，需要<code>Standby Group</code>的所有路由器选举得到。</p>
+<p>在HSRP 选举的过程中，有两个参数尤为重要：</p>
+<ol>
+<li>HSRP Priority</li>
+<li>参与选举的接口IP 地址</li>
+</ol>
+<p>在选举过程中，HSRP Priority 大的路由器选举成功成为Active Router。如果HSRP Priority 值一致，那么接口IP 地址大的会选举成功成为Active Router。</p>
+<p>默认情况下，HSRP 的Priority 值为100，可用取值范围为0-255.</p>
+<h2 id="HSRP-故障切换（角色切换）"><a href="#HSRP-故障切换（角色切换）" class="headerlink" title="HSRP 故障切换（角色切换）"></a>HSRP 故障切换（角色切换）</h2><h3 id="接口故障"><a href="#接口故障" class="headerlink" title="接口故障"></a>接口故障</h3><p>当故障发生时HSRP 的收敛时间取决于<code>Hello Time 计时器</code>和<code>Hold Time 计时器</code>。</p>
+<p>默认情况下，两个计时器的时间分别设置为3s 和10s。这意味着每3s <code>HSRP Group</code>的设备之间会发送一次<code>Hello Message</code>，并且如果10s 内未收到<code>Hello Message</code>，则<code>Standby Router</code> 会切换成<code>Active Router</code>。</p>
+<blockquote>
+<p>to avoid increased CPU usage and unnecessary standby state flapping, do not set the hello timer below one (1) second or the hold timer below 4 seconds.</p>
+</blockquote>
+<p>当有超过2个路由器加入组时，选举只会产生1个<code>Active Router</code> 和1个<code>Standby Router</code>，其余路由器会保持<code>Listen</code> 状态；在<code>Active Router</code> 失效，<code>Standby Router</code> 状态转变为<code>Active Router</code> 后，其余路由器会重新进入<code>Speak</code> 状态来选举新的<code>Standby Router</code>。</p>
+<h3 id="配合HSRP-Tracking-Mechanism-功能发生的抢占行为"><a href="#配合HSRP-Tracking-Mechanism-功能发生的抢占行为" class="headerlink" title="配合HSRP Tracking Mechanism 功能发生的抢占行为"></a>配合HSRP Tracking Mechanism 功能发生的抢占行为</h3><p>如果使用了<code>HSRP Tracking Mechanism</code> ，并且追踪的行为生效，则故障切换或者抢占行为会立即发生，无论此时的两个计时器状态如何。</p>
+<h3 id="HSRP-Timer"><a href="#HSRP-Timer" class="headerlink" title="HSRP Timer"></a>HSRP Timer</h3><table>
+<thead>
+<tr>
+<th>Timer</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Active Timer</td>
+<td>This timer is used to monitor the active router. This timer starts any time an active router receives a hello packet. This timer expires in accordance with the hold time value that is set in the related field of the HSRP hello message.</td>
+</tr>
+<tr>
+<td>Standby Timer</td>
+<td>This timer is used in order to monitor the standby router. The timer starts any time the standby router receives a hello packet. This timer expires in accordance with the hold time value that is set in the respective hello packet.</td>
+</tr>
+<tr>
+<td>Hello timer</td>
+<td>This timer is used to clock hello packets. All HSRP routers in any HSRP state generate a hello packet when this hello timer expires.</td>
+</tr>
+</tbody></table>
+<h2 id="HSRP-Message"><a href="#HSRP-Message" class="headerlink" title="HSRP Message"></a>HSRP Message</h2><h3 id="HSRP-v1"><a href="#HSRP-v1" class="headerlink" title="HSRP v1"></a>HSRP v1</h3><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Rayd62/note_images/202205191228016.png"
+                     
+                ></p>
+<h2 id="HSRP-地址"><a href="#HSRP-地址" class="headerlink" title="HSRP 地址"></a>HSRP 地址</h2><h3 id="HSRP-v1-地址"><a href="#HSRP-v1-地址" class="headerlink" title="HSRP v1 地址"></a>HSRP v1 地址</h3><p>业务IP（子网GW）：虚拟IP一个，子网内其它地方不能使用该IP。<br>Hello Message dst IP：224.0.0.2<br>Mac Address：0000.0c07.acXX(X 指可替换值，因此在HSRP v1 中，一个网络设备最多支持255 个Standby Group，这是MAC 的限制)<br>UDP：1985</p>
+<h3 id="HSRP-v2-地址"><a href="#HSRP-v2-地址" class="headerlink" title="HSRP v2 地址"></a>HSRP v2 地址</h3><p>业务IP（子网GW）：虚拟IP一个，子网内其它地方不能使用该IP。<br>Hello Message dst IP：224.0.0.102<br>Mac Address：0000.0c07.aXXX(X 指可替换值，因此在HSRP v2 中，一个网络设备最多支持4095 个Standby Group，但是虚拟MAC 的取值范围尚未找到相关文档支持)<br>UDP：1985</p>
+<h2 id="HSRP-状态"><a href="#HSRP-状态" class="headerlink" title="HSRP 状态"></a>HSRP 状态</h2><h3 id="Initial"><a href="#Initial" class="headerlink" title="Initial"></a>Initial</h3><p>HSRP 尚未运行，当接口状态UP 或配置变更时会进入此状态。</p>
+<h3 id="Learn"><a href="#Learn" class="headerlink" title="Learn"></a>Learn</h3><p>路由器尚未决定VIP，也并没有收到信任的<code>Active Router</code> 发来的 <code>Hello Message</code>。这个状态下，路由器会等待<code>Active Router</code> 的信息。</p>
+<h3 id="Listen"><a href="#Listen" class="headerlink" title="Listen"></a>Listen</h3><p>路由器获取到VIP，但既不是<code>Active Router</code> 也不是<code>Standby Router</code>。能够从组播地址收到<code>Hello Message</code>。</p>
+<h3 id="Speak"><a href="#Speak" class="headerlink" title="Speak"></a>Speak</h3><p>路由器发送周期性的<code>Hello Message</code>来主动参加HSRP 的active&#x2F;standby 选举。只有配置了VIP 的路由器才能进入<code>Speak</code> 状态。</p>
+<h3 id="Standby"><a href="#Standby" class="headerlink" title="Standby"></a>Standby</h3><p>该路由器是下一个活动路由器的候选路由器，并定期发送Hello消息。</p>
+<h3 id="Active"><a href="#Active" class="headerlink" title="Active"></a>Active</h3><p>路由器当前正在转发发送到组的虚拟MAC地址的数据包。</p>
+<h2 id="HSRP-v1-VS-HSRP-v2"><a href="#HSRP-v1-VS-HSRP-v2" class="headerlink" title="HSRP v1 VS. HSRP v2"></a>HSRP v1 VS. HSRP v2</h2><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>HSRP v1</th>
+<th>HSRP v2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>milisecond timer</td>
+<td>不支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>group numbers</td>
+<td>0-255</td>
+<td>0-4095</td>
+</tr>
+<tr>
+<td>physical device identified by hello message</td>
+<td>不支持</td>
+<td>支持，Hello Message 6bytes 字段记录发送者MAC 地址</td>
+</tr>
+<tr>
+<td>Multicase address</td>
+<td>224.0.0.2（此地址）</td>
+<td>224.0.0.102</td>
+</tr>
+</tbody></table>
+<h1 id="HSRP-Feature"><a href="#HSRP-Feature" class="headerlink" title="HSRP Feature"></a>HSRP Feature</h1><h2 id="HSRP-抢占-Preemption"><a href="#HSRP-抢占-Preemption" class="headerlink" title="HSRP 抢占 - Preemption"></a>HSRP 抢占 - Preemption</h2><p>HSRP 抢占机制允许拥有高HSRP 优先级的网络设备立即成为<code>Active Router</code>。<br>当一个高优先级的网络设备从低优先级的网络设备抢占<code>Active Router</code>，会发送一条报文通告<code>Standby Group</code>。<br>当低优先级网络设备收到从高优先级设备发出的抢占报文，网络设备会改变状态到<code>Speak</code>，然后<code>Standby Group</code> 开始重新选举<code>Standby Router</code>。</p>
+<h2 id="HSRP-抢占延迟-Preempt-Delay"><a href="#HSRP-抢占延迟-Preempt-Delay" class="headerlink" title="HSRP 抢占延迟 - Preempt Delay"></a>HSRP 抢占延迟 - Preempt Delay</h2><p>抢占延迟机制允许路由器延后xx 秒抢占<code>Active Router</code>，此机制主要是为了让路由器有充足的时间来完成相应的路由收敛。</p>
+<p>该机制从发生一次抢占开始，例如Router A的出口链路故障，引发自身HSRP Priority 下降，被Router B 抢占了<code>Active Router</code>的角色。此时Delay 计时器开始计时？（还是说该台设备链路恢复，Priority 重新提高，等待一定delay 时间等待路由收敛）</p>
+<h2 id="端口-x2F-链路检测-Interface-Tracking"><a href="#端口-x2F-链路检测-Interface-Tracking" class="headerlink" title="端口&#x2F;链路检测 - Interface Tracking"></a>端口&#x2F;链路检测 - Interface Tracking</h2><p>端口&#x2F;链路检测允许管理员在网络设备上指定HSRP进程的监控另一个接口的状态，以便更改HSRP 的HSRP Priority 值。</p>
+<p>使用场景：如果指定接口的Line Protocol DOWN，则此路由器的HSRP优先级会根据配置自动调低，从而允许让<code>Standby Group</code> 中的另一个优先级更高的网络设备抢占<code>Active Router</code>。</p>
+<blockquote>
+<p>如果HSRP 配置监控了多个端口，那么HSRP Priority 的值调整是累加的。例如，配置一个端口故障，Priority 降低10；另一个端口故障，Priority 降低5，那么当两个端口都故障的时候，HSRP Priority 的值会下降15.</p>
+</blockquote>
+<h2 id="使用网络设备MAC-地址-Use-Burned-In-Address"><a href="#使用网络设备MAC-地址-Use-Burned-In-Address" class="headerlink" title="使用网络设备MAC 地址 - Use Burned-In Address"></a>使用网络设备MAC 地址 - Use Burned-In Address</h2><p>使用Burned-In Address 特性可以让<code>HSRP Group</code> 使用设备接口的MAC 地址为用户提供服务。</p>
+<blockquote>
+<p>实施<code>Use-bia</code>命令是为了克服在令牌环接口上使用HSRP MAC地址的功能地址的限制。</p>
+</blockquote>
+<p>但是使用<code>use-bia</code> 命令会有以下几点劣势：</p>
+<ol>
+<li>当一个新的网络设备成为<code>Active Router</code> 时，<code>Virtual IP address</code> 会与新的网络设备的接口地址绑定，这时新的网络设备会发送<code>gratuitous ARP</code> 通告内网用户， ARP 映射关系发生变化，但是并非所有内网主机都能识别<code>gratuitous ARP</code> 数据包的；</li>
+<li><code>Proxy ARP</code> 会被<code>use-bia</code> 命令破坏其功能性。成为<code>Active Router</code> 的网络设备会无法恢复已有的ARP 数据库；</li>
+<li>如果配置了<code>use-bis</code>，则只允许一个HSRP组。</li>
+</ol>
+<h2 id="Multiple-HSRP-Group"><a href="#Multiple-HSRP-Group" class="headerlink" title="Multiple HSRP Group"></a>Multiple HSRP Group</h2><p>此功能进一步实现了网络内的冗余和负载共享，并允许更充分地利用冗余路由器。当路由器主动转发一个HSRP组的流量时，它可以处于备用状态，也可以处于另一个组的侦听状态。</p>
+<h2 id="配置HSRP-Group-MAC-地址"><a href="#配置HSRP-Group-MAC-地址" class="headerlink" title="配置HSRP Group MAC 地址"></a>配置HSRP Group MAC 地址</h2><p>通常，您使用HSRP来帮助终端站定位IP路由的第一跳网关。终端站配置有默认网关。但是，HSRP可以为其他协议提供第一跳冗余。某些协议(例如高级对等网络(APPN))使用MAC地址来标识第一跳以实现路由目的。</p>
+<p>在这种情况下，通常需要能够使用备用mac-Address命令指定虚拟MAC地址。虚拟IP地址对于这些协议并不重要。该命令的实际语法为<code>STANDBY [GROUP] MAC-ADDRESS Mac-Address</code>。</p>
+<h2 id="HSRP-with-ICMP-Redicret"><a href="#HSRP-with-ICMP-Redicret" class="headerlink" title="HSRP with ICMP Redicret"></a>HSRP with ICMP Redicret</h2><p>每个子网上运行两个(或更多)HSRP组，配置的HSRP组至少与参与的路由器数量一样多。配置优先级时，每台路由器都是至少一个HSRP组的主路由器。当一台路由器确定将终端站重定向到特定目的地的另一台路由器时，它不是将终端站重定向到另一台路由器的IP地址，而是找到将该路由器作为其主路由器的HSRP组，并将终端站重定向到相应的虚拟IP地址。如果该目标路由器随后出现故障，HSRP将确保另一台路由器接管其工作，并可能将终端站重定向到另一台虚拟路由器。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a class="link"   target="_blank" rel="noopener" href="https://ipcisco.com/lesson/hsrp/" >What is HSRP ? | Hot Standby Router Protocol ⋆ IpCisco<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html#hrspadd" >Hot Standby Router Protocol Features and Functionality - Cisco<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://www.rfc-editor.org/rfc/rfc2281.html" >RFC 2281: Cisco Hot Standby Router Protocol (HSRP) (rfc-editor.org)<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9281-3.html" >Hot Standby Router Protocol (HSRP): Frequently Asked Questions - Cisco<i class="fas fa-external-link-alt"></i></a></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：24.HSRP - Hot Standby Router Protocol</li>
+        <li>本文作者：Rayd62</li>
+        <li>创建时间：2022-05-23 18:14:10</li>
+        <li>
+            本文链接：https://blog.hf2.space/2022/05/23/24-HSRP-Hot-Standby-Router-Protocol/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF/">#网络技术</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/05/23/24-%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E7%B3%BB%E5%88%97-%E5%8F%91%E8%B4%A7%E5%8D%95%E5%A4%84%E7%90%86/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">24.自动化办公系列-发货单处理</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Rayd62</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HSRP-Hot-Standby-Router-Protocol"><span class="nav-number">1.</span> <span class="nav-text">HSRP(Hot Standby Router Protocol)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HSRP-%E7%9A%84%E8%83%8C%E6%99%AF"><span class="nav-number">2.</span> <span class="nav-text">HSRP 的背景</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AFHSRP-%E6%9D%A5%E4%BF%9D%E9%9A%9C%E4%B8%BB%E6%9C%BA%E8%AE%BF%E9%97%AE%E5%85%B6%E5%AE%83%E7%BD%91%E7%BB%9C%E7%9A%84%E5%BC%B9%E6%80%A7%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">为什么是HSRP 来保障主机访问其它网络的弹性？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Proxy-ARP%EF%BC%88ARP-%E4%BB%A3%E7%AD%94%EF%BC%89"><span class="nav-number">2.1.1.</span> <span class="nav-text">Proxy ARP（ARP 代答）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dynamic-Routing-Protocol-%EF%BC%88%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE%EF%BC%89"><span class="nav-number">2.1.2.</span> <span class="nav-text">Dynamic Routing Protocol （动态路由协议）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ICMP-Router-DIscovery-Protocol-%EF%BC%88ICMP-%E8%B7%AF%E7%94%B1%E5%99%A8%E5%8F%91%E7%8E%B0%E5%8D%8F%E8%AE%AE%EF%BC%89"><span class="nav-number">2.1.3.</span> <span class="nav-text">ICMP Router DIscovery Protocol （ICMP 路由器发现协议）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dynamic-Host-Configuration-Protocol-%EF%BC%88DHCP%EF%BC%89"><span class="nav-number">2.1.4.</span> <span class="nav-text">Dynamic Host Configuration Protocol （DHCP）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HSRP-%E6%98%AF%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3%E7%BD%91%E5%85%B3%E5%A4%B1%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-number">2.1.5.</span> <span class="nav-text">HSRP 是怎么解决网关失效的问题？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HSRP-%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">HSRP 的工作模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AF%E8%AF%AD"><span class="nav-number">3.1.</span> <span class="nav-text">术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HSRP-%E9%80%89%E4%B8%BE"><span class="nav-number">3.2.</span> <span class="nav-text">HSRP 选举</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HSRP-%E6%95%85%E9%9A%9C%E5%88%87%E6%8D%A2%EF%BC%88%E8%A7%92%E8%89%B2%E5%88%87%E6%8D%A2%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">HSRP 故障切换（角色切换）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E6%95%85%E9%9A%9C"><span class="nav-number">3.3.1.</span> <span class="nav-text">接口故障</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E5%90%88HSRP-Tracking-Mechanism-%E5%8A%9F%E8%83%BD%E5%8F%91%E7%94%9F%E7%9A%84%E6%8A%A2%E5%8D%A0%E8%A1%8C%E4%B8%BA"><span class="nav-number">3.3.2.</span> <span class="nav-text">配合HSRP Tracking Mechanism 功能发生的抢占行为</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HSRP-Timer"><span class="nav-number">3.3.3.</span> <span class="nav-text">HSRP Timer</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HSRP-Message"><span class="nav-number">3.4.</span> <span class="nav-text">HSRP Message</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HSRP-v1"><span class="nav-number">3.4.1.</span> <span class="nav-text">HSRP v1</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HSRP-%E5%9C%B0%E5%9D%80"><span class="nav-number">3.5.</span> <span class="nav-text">HSRP 地址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HSRP-v1-%E5%9C%B0%E5%9D%80"><span class="nav-number">3.5.1.</span> <span class="nav-text">HSRP v1 地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HSRP-v2-%E5%9C%B0%E5%9D%80"><span class="nav-number">3.5.2.</span> <span class="nav-text">HSRP v2 地址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HSRP-%E7%8A%B6%E6%80%81"><span class="nav-number">3.6.</span> <span class="nav-text">HSRP 状态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Initial"><span class="nav-number">3.6.1.</span> <span class="nav-text">Initial</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Learn"><span class="nav-number">3.6.2.</span> <span class="nav-text">Learn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Listen"><span class="nav-number">3.6.3.</span> <span class="nav-text">Listen</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Speak"><span class="nav-number">3.6.4.</span> <span class="nav-text">Speak</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Standby"><span class="nav-number">3.6.5.</span> <span class="nav-text">Standby</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Active"><span class="nav-number">3.6.6.</span> <span class="nav-text">Active</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HSRP-v1-VS-HSRP-v2"><span class="nav-number">3.7.</span> <span class="nav-text">HSRP v1 VS. HSRP v2</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HSRP-Feature"><span class="nav-number">4.</span> <span class="nav-text">HSRP Feature</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HSRP-%E6%8A%A2%E5%8D%A0-Preemption"><span class="nav-number">4.1.</span> <span class="nav-text">HSRP 抢占 - Preemption</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HSRP-%E6%8A%A2%E5%8D%A0%E5%BB%B6%E8%BF%9F-Preempt-Delay"><span class="nav-number">4.2.</span> <span class="nav-text">HSRP 抢占延迟 - Preempt Delay</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3-x2F-%E9%93%BE%E8%B7%AF%E6%A3%80%E6%B5%8B-Interface-Tracking"><span class="nav-number">4.3.</span> <span class="nav-text">端口&#x2F;链路检测 - Interface Tracking</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87MAC-%E5%9C%B0%E5%9D%80-Use-Burned-In-Address"><span class="nav-number">4.4.</span> <span class="nav-text">使用网络设备MAC 地址 - Use Burned-In Address</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multiple-HSRP-Group"><span class="nav-number">4.5.</span> <span class="nav-text">Multiple HSRP Group</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEHSRP-Group-MAC-%E5%9C%B0%E5%9D%80"><span class="nav-number">4.6.</span> <span class="nav-text">配置HSRP Group MAC 地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HSRP-with-ICMP-Redicret"><span class="nav-number">4.7.</span> <span class="nav-text">HSRP with ICMP Redicret</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

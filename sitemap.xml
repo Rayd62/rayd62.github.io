@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.hf2.space/2022/05/23/24-HSRP-Hot-Standby-Router-Protocol/</loc>
+    
+    <lastmod>2022-05-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.hf2.space/2022/05/23/24-%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC%E7%B3%BB%E5%88%97-%E5%8F%91%E8%B4%A7%E5%8D%95%E5%A4%84%E7%90%86/</loc>
     
     <lastmod>2022-05-23</lastmod>
