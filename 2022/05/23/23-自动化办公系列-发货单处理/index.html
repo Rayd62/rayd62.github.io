@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="功成不必在我 功力必不唐捐">
+    <meta name="author" content="Rayd62">
+    
+    <title>
+        
+            23.自动化办公系列-发货单处理 |
+        
+        Laplace&#39; Café
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"blog.hf2.space","root":"/","language":"zh-CN","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":false,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"center","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"功成不必在我 功力必不唐捐"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":false},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Laplace&#39; Café
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">23.自动化办公系列-发货单处理</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Rayd62</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-05-23 09:36:53</span>
+        <span class="mobile">2022-05-23 09:36</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/python/">python</a>&nbsp;
+                    </li>
+                
+                    <li>
+                        | <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC/">自动化办公</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="源文件"><a href="#源文件" class="headerlink" title="源文件"></a>源文件</h1><p>| 序号               | 订单号           | 需求单号        | 送货机房                           | 送货地址                                          | 物料编号       | 物料描述                                         | 品名         | 品牌  | 型号                      | 期望货期  | 实际到货日期 | 固资号        | SN码        | 箱号        | 数量 | 送货单数量 | 待送货数量 |<br>| —————— | —————- | ————— | ———————————- | ————————————————- | ————– | ———————————————— | ———— | —– | ————————- | ——— | ———— | ————- | ———– | ———– | —- | ———- |<br>| 100179884521816131 | TSPO202201100059 | NPA202112100034 | 敏感信息处理 | 敏感信息处理 | 795250EBKF2480 | 敏感信息处理 | 网络设备板卡 | 敏感信息处理 | 敏感信息处理 | 2022&#x2F;7&#x2F;15 |              | TYNM220105829 | FOC2613NF1B | 20220513003 | 1    | 1          | 1          |<br>| 100179884521816130 | TSPO202201100059 | NPA202112100034 | 敏感信息处理 | 敏感信息处理 | 795250EBKF2480 | 敏感信息处理 | 网络设备板卡 | 敏感信息处理 | 敏感信息处理 | 2022&#x2F;7&#x2F;15 |              | TYNM220105828 | FOC2613NEZ5 | 20220513004 | 1    | 2          | 1          |<br>| 100179884521816129 | TSPO202201100059 | NPA202112100034 | 敏感信息处理 | 敏感信息处理 | 795250EBKF2480 | 敏感信息处理 | 网络设备板卡 | 敏感信息处理 | 敏感信息处理 | 2022&#x2F;7&#x2F;15 |              | TYNM220105827 | FOC2613NF17 | 20220513005 | 1    | 3          | 1          |<br>| 100179884521816128 | TSPO202201100059 | NPA202112100034 | 敏感信息处理 | 敏感信息处理 | 795250EBKF2480 | 敏感信息处理 | 网络设备板卡 | 敏感信息处理 | 敏感信息处理 | 2022&#x2F;7&#x2F;15 |              | TYNM220105826 | FOC2614K5UV | 20220513006 | 1    | 4          | 1           |</p>
+<h1 id="目标文件"><a href="#目标文件" class="headerlink" title="目标文件"></a>目标文件</h1><p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://cdn.jsdelivr.net/gh/Rayd62/note_images02/202205230947398.png"
+                     
+                ></p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> qrcode</span><br><span class="line"><span class="keyword">from</span> barcode <span class="keyword">import</span> Code128</span><br><span class="line"><span class="keyword">from</span> barcode.writer <span class="keyword">import</span> ImageWriter</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image <span class="keyword">as</span> ImagePIL</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> openpyxl <span class="keyword">import</span> Workbook</span><br><span class="line"><span class="keyword">from</span> openpyxl.drawing.image <span class="keyword">import</span> Image <span class="keyword">as</span> ImageXL</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">qrCodeGen</span>(<span class="params">fName, info</span>):</span><br><span class="line">    <span class="comment"># info 是SN 码</span></span><br><span class="line">    <span class="comment"># 之后会将文件名改成另一个形式，将所有信息进行统一</span></span><br><span class="line">    img = qrcode.make(info)</span><br><span class="line">    img.save(<span class="string">f&quot;<span class="subst">&#123;fName&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">barCodeGen</span>(<span class="params">fName, info</span>):</span><br><span class="line">    <span class="comment"># info 是箱号</span></span><br><span class="line">    <span class="comment"># 之后会讲文件名</span></span><br><span class="line">    <span class="comment"># image pixel: 324 x 280</span></span><br><span class="line">    img = Code128(info, writer=ImageWriter())</span><br><span class="line">    img.save(<span class="string">f&quot;<span class="subst">&#123;fName&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">imgResize</span>(<span class="params">fName, image</span>):</span><br><span class="line">    <span class="comment"># 图片缩减</span></span><br><span class="line">    <span class="comment"># 打开原始图片，修改文件高度</span></span><br><span class="line">    img = ImagePIL.<span class="built_in">open</span>(image)</span><br><span class="line">    img = img.resize((<span class="number">250</span>, <span class="number">130</span>), ImagePIL.LANCZOS)</span><br><span class="line">    img.save(<span class="string">f&#x27;<span class="subst">&#123;fName&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">imgCropper</span>(<span class="params">fName, image</span>):</span><br><span class="line">	<span class="comment"># 剪裁</span></span><br><span class="line">    img = ImagePIL.<span class="built_in">open</span>(image)</span><br><span class="line">    cropped = img.crop((<span class="number">30</span>,<span class="number">30</span>,<span class="number">260</span>,<span class="number">260</span>))</span><br><span class="line">    cropped.save(fName)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">excelProcesser</span>(<span class="params">fName</span>):</span><br><span class="line">    df = pd.read_excel(fName)</span><br><span class="line">    origin = df.to_json()</span><br><span class="line">    origin = json.loads(origin)</span><br><span class="line">    data = []</span><br><span class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> origin[<span class="string">&quot;序号&quot;</span>]:</span><br><span class="line">        <span class="comment"># 按每个条目的序号、箱号、数量和SN 码生成一个新的列表</span></span><br><span class="line">        data.append([origin[<span class="string">&quot;序号&quot;</span>][key], <span class="built_in">str</span>(origin[<span class="string">&quot;箱号&quot;</span>][key]), <span class="built_in">str</span>(origin[<span class="string">&quot;数量&quot;</span>][key]), origin[<span class="string">&quot;SN码&quot;</span>][key], origin[<span class="string">&quot;订单号&quot;</span>][key]])</span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">regularWriter</span>(<span class="params">worksheet, columeA, columeB, line, index</span>):</span><br><span class="line">    worksheet[<span class="string">f&quot;<span class="subst">&#123;columeA&#125;</span><span class="subst">&#123;line&#125;</span>&quot;</span>] = <span class="string">&quot;PO NO.:&quot;</span></span><br><span class="line">    worksheet[<span class="string">f&quot;<span class="subst">&#123;columeB&#125;</span><span class="subst">&#123;line&#125;</span>&quot;</span>] = data[index][<span class="number">4</span>]</span><br><span class="line">    worksheet[<span class="string">f&quot;<span class="subst">&#123;columeA&#125;</span><span class="subst">&#123;line+<span class="number">2</span>&#125;</span>&quot;</span>] = <span class="string">&quot;BOX ID:&quot;</span></span><br><span class="line">    worksheet[<span class="string">f&quot;<span class="subst">&#123;columeB&#125;</span><span class="subst">&#123;line+<span class="number">2</span>&#125;</span>&quot;</span>] = data[index][<span class="number">1</span>]</span><br><span class="line">    worksheet[<span class="string">f&quot;<span class="subst">&#123;columeA&#125;</span><span class="subst">&#123;line+<span class="number">10</span>&#125;</span>&quot;</span>] = <span class="string">f&quot;QTY: <span class="subst">&#123;data[index][<span class="number">2</span>]&#125;</span> PCS&quot;</span></span><br><span class="line">    worksheet[<span class="string">f&quot;<span class="subst">&#123;columeA&#125;</span><span class="subst">&#123;line+<span class="number">12</span>&#125;</span>&quot;</span>] = <span class="string">&quot;SN:&quot;</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">pixelWriter</span>(<span class="params">worksheet, columeA, line, index</span>):    </span><br><span class="line">    <span class="comment"># 添加箱号Code 128</span></span><br><span class="line">    img = ImageXL(<span class="string">f&quot;<span class="subst">&#123;data[index][<span class="number">0</span>]&#125;</span>/Box.png&quot;</span>)</span><br><span class="line">    worksheet.add_image(img, <span class="string">f&quot;<span class="subst">&#123;columeA&#125;</span><span class="subst">&#123;line+<span class="number">3</span>&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="comment"># 添加SN QRCode</span></span><br><span class="line">    img = ImageXL(<span class="string">f&quot;<span class="subst">&#123;data[index][<span class="number">0</span>]&#125;</span>/SN.png&quot;</span>)</span><br><span class="line">    worksheet.add_image(img, <span class="string">f&quot;<span class="subst">&#123;columeA&#125;</span><span class="subst">&#123;line+<span class="number">12</span>&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">    data = excelProcesser(<span class="string">&quot;1.xlsx&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> data:</span><br><span class="line">        os.mkdir(<span class="string">f&quot;<span class="subst">&#123;item[<span class="number">0</span>]&#125;</span>&quot;</span>)</span><br><span class="line">        qrCodeGen(<span class="string">f&quot;<span class="subst">&#123;item[<span class="number">0</span>]&#125;</span>/SN.png&quot;</span>, item[<span class="number">3</span>])</span><br><span class="line">        barCodeGen(<span class="string">f&quot;<span class="subst">&#123;item[<span class="number">0</span>]&#125;</span>/Box&quot;</span>, item[<span class="number">1</span>])</span><br><span class="line">        imgResize(<span class="string">f&quot;<span class="subst">&#123;item[<span class="number">0</span>]&#125;</span>/Box.png&quot;</span>, <span class="string">f&quot;<span class="subst">&#123;item[<span class="number">0</span>]&#125;</span>/Box.png&quot;</span>)</span><br><span class="line">        imgCropper(<span class="string">f&quot;<span class="subst">&#123;item[<span class="number">0</span>]&#125;</span>/SN.png&quot;</span>, <span class="string">f&quot;<span class="subst">&#123;item[<span class="number">0</span>]&#125;</span>/SN.png&quot;</span>)</span><br><span class="line">    wb = Workbook()</span><br><span class="line">    ws = wb.active</span><br><span class="line">    ws.title = data[<span class="number">0</span>][<span class="number">4</span>]</span><br><span class="line">    line = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> index <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(data)):</span><br><span class="line">        <span class="keyword">if</span> index % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">            <span class="comment"># 添加订单文字信息</span></span><br><span class="line">            regularWriter(ws, <span class="string">&quot;C&quot;</span>, <span class="string">&quot;D&quot;</span>, line, index)</span><br><span class="line">            <span class="comment"># 添加箱号Code 128&amp;QRCode</span></span><br><span class="line">            pixelWriter(ws, <span class="string">&quot;D&quot;</span>, line, index)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 添加订单文字信息</span></span><br><span class="line">            regularWriter(ws, <span class="string">&quot;J&quot;</span>, <span class="string">&quot;K&quot;</span>, line, index)</span><br><span class="line">            <span class="comment"># 添加箱号Code 128&amp;QRCode</span></span><br><span class="line">            pixelWriter(ws, <span class="string">&quot;K&quot;</span>, line, index)</span><br><span class="line">            line += <span class="number">26</span></span><br><span class="line">    wb.save(<span class="string">&quot;2.xlsx&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="生成QRCode-并将QRCode-裁剪掉白边"><a href="#生成QRCode-并将QRCode-裁剪掉白边" class="headerlink" title="生成QRCode 并将QRCode 裁剪掉白边"></a>生成QRCode 并将QRCode 裁剪掉白边</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> qrcode</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image <span class="keyword">as</span> ImagePIL</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">qrCodeGen</span>(<span class="params">fName, info</span>):</span><br><span class="line">    <span class="comment"># info 是SN 码</span></span><br><span class="line">    <span class="comment"># 之后会将文件名改成另一个形式，将所有信息进行统一</span></span><br><span class="line">    img = qrcode.make(info)</span><br><span class="line">    img.save(<span class="string">f&quot;<span class="subst">&#123;fName&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">imgCropper</span>(<span class="params">fName, image</span>):</span><br><span class="line">	<span class="comment"># 剪裁</span></span><br><span class="line">    img = ImagePIL.<span class="built_in">open</span>(image)</span><br><span class="line">    cropped = img.crop((<span class="number">30</span>,<span class="number">30</span>,<span class="number">260</span>,<span class="number">260</span>))</span><br><span class="line">    cropped.save(fName)</span><br></pre></td></tr></table></figure>
+
+<h2 id="生成BarCode-并将Barcode-缩减"><a href="#生成BarCode-并将Barcode-缩减" class="headerlink" title="生成BarCode 并将Barcode 缩减"></a>生成BarCode 并将Barcode 缩减</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> barcode <span class="keyword">import</span> Code128</span><br><span class="line"><span class="keyword">from</span> barcode.writer <span class="keyword">import</span> ImageWriter</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image <span class="keyword">as</span> ImagePIL</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">barCodeGen</span>(<span class="params">fName, info</span>):</span><br><span class="line">    <span class="comment"># info 是箱号</span></span><br><span class="line">    <span class="comment"># 之后会讲文件名</span></span><br><span class="line">    <span class="comment"># image pixel: 324 x 280</span></span><br><span class="line">    img = Code128(info, writer=ImageWriter())</span><br><span class="line">    img.save(<span class="string">f&quot;<span class="subst">&#123;fName&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">imgResize</span>(<span class="params">fName, image</span>):</span><br><span class="line">    <span class="comment"># 图片缩减</span></span><br><span class="line">    <span class="comment"># 打开原始图片，修改文件高度</span></span><br><span class="line">    img = ImagePIL.<span class="built_in">open</span>(image)</span><br><span class="line">    img = img.resize((<span class="number">250</span>, <span class="number">130</span>), ImagePIL.LANCZOS)</span><br><span class="line">    img.save(<span class="string">f&#x27;<span class="subst">&#123;fName&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="处理原始表格抓取有用数据"><a href="#处理原始表格抓取有用数据" class="headerlink" title="处理原始表格抓取有用数据"></a>处理原始表格抓取有用数据</h2><p>在目标文件中，我们实际所需的数据有“订单号”，“SN码”，“箱号“和”数量“。<br>但为了区分通过SN 生成的二维码和箱号生成的条形码，我们还需要”序号“来创建不同的目录存放对应的数据。<br>所以最终构成了一个二维列表。[[“序号”, “箱号”, “数量”, “SN码”, “订单号”], [“序号”, “箱号”, “数量”, “SN码”, “订单号”]]</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">excelProcesser</span>(<span class="params">fName</span>):</span><br><span class="line">	<span class="comment"># 通过pandas 读取excel 文件</span></span><br><span class="line">    df = pd.read_excel(fName)</span><br><span class="line">    <span class="comment"># 转化成json 字符串</span></span><br><span class="line">    origin = df.to_json()</span><br><span class="line">    <span class="comment"># 加载Json 字符串，形成一个字典数据</span></span><br><span class="line">    origin = json.loads(origin)</span><br><span class="line">    data = []</span><br><span class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> origin[<span class="string">&quot;序号&quot;</span>]:</span><br><span class="line">        <span class="comment"># 按每个条目的序号、箱号、数量、SN 码和订单号生成一个新的列表</span></span><br><span class="line">        data.append([origin[<span class="string">&quot;序号&quot;</span>][key], <span class="built_in">str</span>(origin[<span class="string">&quot;箱号&quot;</span>][key]), <span class="built_in">str</span>(origin[<span class="string">&quot;数量&quot;</span>][key]), origin[<span class="string">&quot;SN码&quot;</span>][key], origin[<span class="string">&quot;订单号&quot;</span>][key]])</span><br><span class="line">    <span class="keyword">return</span> data</span><br></pre></td></tr></table></figure>
+
+<h2 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h2><ol>
+<li>处理原始表格获取需求数据</li>
+<li>通过“序号”值，生成对应的目录</li>
+<li>生成二维码和条形码到对应“序号”目录，通过PIL 调整生成的图像大小或剪裁</li>
+<li>生成一个新的Excel 表格</li>
+<li>根据订单号修改sheetname</li>
+<li>通过标准化输入，依次写入需要值和图像</li>
+<li>最后保存为”2.xlsx”</li>
+</ol>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>本文标题：23.自动化办公系列-发货单处理</li>
+        <li>本文作者：Rayd62</li>
+        <li>创建时间：2022-05-23 09:36:53</li>
+        <li>
+            本文链接：https://blog.hf2.space/2022/05/23/23-自动化办公系列-发货单处理/
+        </li>
+        <li>
+            版权声明：本博客所有文章除特别声明外，均采用 <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> 许可协议。转载请注明出处！
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/python/">#python</a>&nbsp;
+                    </li>
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9E%E5%85%AC/">#自动化办公</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/05/19/23-7130-%E9%85%8D%E7%BD%AE%E6%80%BB%E7%BB%93/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">23.7130 配置总结</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Rayd62</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%BA%90%E6%96%87%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">源文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">目标文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90QRCode-%E5%B9%B6%E5%B0%86QRCode-%E8%A3%81%E5%89%AA%E6%8E%89%E7%99%BD%E8%BE%B9"><span class="nav-number">3.1.</span> <span class="nav-text">生成QRCode 并将QRCode 裁剪掉白边</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90BarCode-%E5%B9%B6%E5%B0%86Barcode-%E7%BC%A9%E5%87%8F"><span class="nav-number">3.2.</span> <span class="nav-text">生成BarCode 并将Barcode 缩减</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E5%8E%9F%E5%A7%8B%E8%A1%A8%E6%A0%BC%E6%8A%93%E5%8F%96%E6%9C%89%E7%94%A8%E6%95%B0%E6%8D%AE"><span class="nav-number">3.3.</span> <span class="nav-text">处理原始表格抓取有用数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="nav-number">3.4.</span> <span class="nav-text">工作流程</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/lazyload.js"></script>
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
